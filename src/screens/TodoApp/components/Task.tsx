@@ -30,13 +30,13 @@ export default function Task(props: any) {
           <CheckBox
             checkedIcon={
               <Image
-                style={{ height: 20, width: 20 }}
+                style={styles.icon}
                 source={require('../../../assets/check.jpg')}
               />
             }
             uncheckedIcon={
               <Image
-                style={{ height: 20, width: 20 }}
+                style={styles.icon}
                 source={require('../../../assets/uncheck.jpg')}
               />
             }
@@ -55,6 +55,10 @@ export default function Task(props: any) {
 }
 
 const styles = StyleSheet.create({
+  icon: {
+    height: 20,
+    width: 20,
+  },
   item: {
     backgroundColor: '#FFF',
     padding: 15,
@@ -69,22 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
   },
-  square: {
-    width: 24,
-    height: 24,
-    backgroundColor: '#55BCF6',
-    opacity: 0.4,
-    borderRadius: 5,
-    marginRight: 15,
-  },
   itemText: {
     maxWidth: '80%',
-  },
-  circular: {
-    width: 12,
-    height: 12,
-    borderColor: '#55BCF6',
-    borderRadius: 5,
-    borderWidth: 2,
   },
 });

@@ -7,6 +7,9 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Modal,
+  Alert,
+  Pressable,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -43,6 +46,7 @@ const TodoApp = () => {
   });
   const dispatch = useDispatch();
   const [hideDelete, setHideDelete] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const handleAddTask = () => {
     dispatch(
       addTask({
@@ -56,11 +60,12 @@ const TodoApp = () => {
     values.description = '';
   };
   const handleDeleteTask = () => {
+    setModalVisible(!modalVisible);
     dispatch(deleteTask());
   };
   useEffect(() => {
     let count = 0;
-    taskList.map((task, index) => {
+    taskList.map((task: any) => {
       if (!task.isChecked) {
         count = count + 1;
       }
@@ -106,7 +111,7 @@ const TodoApp = () => {
           <View style={styles.viewDelete}>
             <TouchableOpacity
               style={styles.delete}
-              onPress={() => handleDeleteTask()}>
+              onPress={() => setModalVisible(true)}>
               <Text>Xóa</Text>
             </TouchableOpacity>
           </View>
@@ -116,12 +121,41 @@ const TodoApp = () => {
             return <Task task={item} key={index} />;
           })}
         </View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Bạn có chắc muốn xóa không?</Text>
+              <View style={styles.flex}>
+                <Pressable
+                  style={[styles.button, styles.buttonDelete]}
+                  onPress={() => handleDeleteTask()}>
+                  <Text style={styles.textStyle}>Có</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={styles.textStyle}>Không</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  flex: {
+    flexDirection: 'row',
+  },
   error: {
     fontSize: 14,
     color: 'red',
@@ -188,6 +222,51 @@ const styles = StyleSheet.create({
   },
   addText: {
     fontSize: 20,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    margin: 5,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonDelete: {
+    backgroundColor: 'green',
+  },
+  buttonClose: {
+    backgroundColor: 'red',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
 export default TodoApp;
