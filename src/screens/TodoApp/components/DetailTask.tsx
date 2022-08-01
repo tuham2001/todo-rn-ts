@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { updateTask } from '../../../redux/todo/todoThunk';
 

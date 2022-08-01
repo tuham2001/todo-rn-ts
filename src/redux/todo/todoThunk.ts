@@ -1,4 +1,4 @@
-import { getTask } from "./todoRedux";
+import { getTask } from './todoRedux';
 
 export function addTask(task: any) {
   return function AddTask(dispatch: any, getState: any) {

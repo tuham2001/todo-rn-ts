@@ -28,18 +28,8 @@ export default function Task(props: any) {
       <View style={styles.item}>
         <View style={styles.itemLeft}>
           <CheckBox
-            checkedIcon={
-              <Image
-                style={styles.icon}
-                source={require('../../../assets/check.jpg')}
-              />
-            }
-            uncheckedIcon={
-              <Image
-                style={styles.icon}
-                source={require('../../../assets/uncheck.jpg')}
-              />
-            }
+            checkedIcon={<Image style={styles.icon} source={require('../../../assets/check.jpg')} />}
+            uncheckedIcon={<Image style={styles.icon} source={require('../../../assets/uncheck.jpg')} />}
             size={0}
             title={'Check'}
             checked={task.isChecked}

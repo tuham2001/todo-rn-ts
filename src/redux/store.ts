@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
@@ -8,14 +8,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   persistStore,
   persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
+  // FLUSH,
+  // REHYDRATE,
+  // PAUSE,
+  // PERSIST,
+  // PURGE,
+  // REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import rootSaga from './rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();

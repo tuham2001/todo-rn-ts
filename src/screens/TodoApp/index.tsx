@@ -1,16 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import {
-  ScrollView,
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Modal,
-  Alert,
-  Pressable,
-} from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, Alert, Pressable } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -24,15 +14,7 @@ const TodoApp = () => {
     title: yup.string().required('Username is not empty'),
     description: yup.string().required('Password is not empty'),
   });
-  const {
-    values,
-    handleChange,
-    errors,
-    handleSubmit,
-    setFieldTouched,
-    touched,
-    handleBlur,
-  } = useFormik({
+  const { values, handleChange, errors, handleSubmit, setFieldTouched, touched, handleBlur } = useFormik({
     initialValues: {
       title: '',
       description: '',
@@ -77,9 +59,7 @@ const TodoApp = () => {
     }
   }, [taskList]);
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      style={styles.container}>
+    <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
       <View style={styles.tasksWrapper}>
         <Text style={styles.sectionTitle}>Todo list app</Text>
         <TextInput
@@ -89,9 +69,7 @@ const TodoApp = () => {
           placeholder="Write a title"
           onBlur={handleBlur('title')}
         />
-        {errors.title && touched.title ? (
-          <Text style={styles.error}>{errors.title}</Text>
-        ) : null}
+        {errors.title && touched.title ? <Text style={styles.error}>{errors.title}</Text> : null}
         <TextInput
           value={values.description}
           onChangeText={handleChange('description')}
@@ -99,9 +77,7 @@ const TodoApp = () => {
           placeholder="Write a description"
           onBlur={handleBlur('description')}
         />
-        {errors.description && touched.description ? (
-          <Text style={styles.error}>{errors.description}</Text>
-        ) : null}
+        {errors.description && touched.description ? <Text style={styles.error}>{errors.description}</Text> : null}
         <TouchableOpacity style={styles.addWrapper} onPress={handleSubmit}>
           <View>
             <Text style={styles.addText}>+</Text>
@@ -109,9 +85,7 @@ const TodoApp = () => {
         </TouchableOpacity>
         {hideDelete ? (
           <View style={styles.viewDelete}>
-            <TouchableOpacity
-              style={styles.delete}
-              onPress={() => setModalVisible(true)}>
+            <TouchableOpacity style={styles.delete} onPress={() => setModalVisible(true)}>
               <Text>Xóa</Text>
             </TouchableOpacity>
           </View>
@@ -133,14 +107,10 @@ const TodoApp = () => {
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Bạn có chắc muốn xóa không?</Text>
               <View style={styles.flex}>
-                <Pressable
-                  style={[styles.button, styles.buttonDelete]}
-                  onPress={() => handleDeleteTask()}>
+                <Pressable style={[styles.button, styles.buttonDelete]} onPress={() => handleDeleteTask()}>
                   <Text style={styles.textStyle}>Có</Text>
                 </Pressable>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}>
+                <Pressable style={[styles.button, styles.buttonClose]} onPress={() => setModalVisible(!modalVisible)}>
                   <Text style={styles.textStyle}>Không</Text>
                 </Pressable>
               </View>
