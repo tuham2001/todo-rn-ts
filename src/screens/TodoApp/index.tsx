@@ -1,12 +1,13 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, Alert, Pressable } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Task from './components/Task';
 import { addTask, deleteTask } from '../../redux/todo/todoThunk';
 import { getUuid } from '../../utils/common/getUuid';
+import { dispatchStore } from '../../redux/store';
 
 const TodoApp = () => {
   const taskList = useSelector((state: any) => state.user.todoReducer.taskList);
@@ -26,11 +27,10 @@ const TodoApp = () => {
     },
     validationSchema,
   });
-  const dispatch = useDispatch();
   const [hideDelete, setHideDelete] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const handleAddTask = () => {
-    dispatch(
+    dispatchStore(
       addTask({
         title: values.title,
         description: values.description,
@@ -43,7 +43,7 @@ const TodoApp = () => {
   };
   const handleDeleteTask = () => {
     setModalVisible(!modalVisible);
-    dispatch(deleteTask());
+    dispatchStore(deleteTask());
   };
   useEffect(() => {
     let count = 0;

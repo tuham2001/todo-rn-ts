@@ -16,6 +16,7 @@ import {
   // REGISTER,
 } from 'redux-persist';
 import rootSaga from './rootSaga';
+import { Dispatch } from 'react';
 
 const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
@@ -45,3 +46,5 @@ sagaMiddleware.run(rootSaga);
 export const persistor = persistStore(store);
 
 export default store;
+
+export const dispatchStore = store.dispatch as typeof store.dispatch | Dispatch<any>;

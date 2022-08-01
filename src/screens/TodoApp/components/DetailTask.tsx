@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { dispatchStore } from '../../../redux/store';
 import { updateTask } from '../../../redux/todo/todoThunk';
 
 const DetailTask = (props: any) => {
@@ -11,7 +11,6 @@ const DetailTask = (props: any) => {
   const [updateDescription, setUpdateDescription] = useState(task.description);
   const [saveTitle, setSaveTitle] = useState(task.title);
   const [saveDescription, setSaveDescription] = useState(task.description);
-  const dispatch = useDispatch();
   const handleEdit = () => {
     // setHide(true);
     setEdit(true);
@@ -23,7 +22,7 @@ const DetailTask = (props: any) => {
     setUpdateDescription(saveDescription);
   };
   const handleSave = () => {
-    dispatch(
+    dispatchStore(
       updateTask({
         title: updateTitle,
         description: updateDescription,

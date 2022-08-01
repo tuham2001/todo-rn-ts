@@ -1,17 +1,16 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/core';
 import { checkTask } from '../../../redux/todo/todoThunk';
+import { dispatchStore } from '../../../redux/store';
 
 export default function Task(props: any) {
   const navigation = useNavigation();
 
   const { task } = props;
-  const dispatch = useDispatch();
   const handleCheckTask = () => {
-    dispatch(
+    dispatchStore(
       checkTask({
         title: task.title,
         description: task.description,
