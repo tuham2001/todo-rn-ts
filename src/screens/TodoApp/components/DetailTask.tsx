@@ -6,17 +6,21 @@ import { updateTask } from '../../../redux/todo/todoThunk';
 const DetailTask = (props: any) => {
   const { task } = props.route.params;
   const [edit, setEdit] = useState(false);
+  const [hide, setHide] = useState(false);
   const [updateTitle, setUpdateTitle] = useState(task.title);
   const [updateDescription, setUpdateDescription] = useState(task.description);
+  const [saveTitle, setSaveTitle] = useState(task.title);
+  const [saveDescription, setSaveDescription] = useState(task.description);
   const dispatch = useDispatch();
-
   const handleEdit = () => {
+    // setHide(true);
     setEdit(true);
   };
   const handleCancel = () => {
     setEdit(false);
-    setUpdateTitle(task.title);
-    setUpdateDescription(task.description);
+    setHide(false);
+    setUpdateTitle(saveTitle);
+    setUpdateDescription(saveDescription);
   };
   const handleSave = () => {
     dispatch(
@@ -27,7 +31,18 @@ const DetailTask = (props: any) => {
         id: task.id,
       }),
     );
+    setSaveTitle(updateTitle);
+    setSaveDescription(updateDescription);
     setEdit(false);
+    setHide(false);
+  };
+  const handleChangeTitle = (text: any) => {
+    setUpdateTitle(text);
+    setHide(true);
+  };
+  const handleChangeDescription = (text: any) => {
+    setUpdateDescription(text);
+    setHide(true);
   };
   return (
     <View style={styles.item}>
@@ -35,18 +50,18 @@ const DetailTask = (props: any) => {
         <TextInput
           editable={edit}
           value={updateTitle}
-          onChangeText={(text: any) => setUpdateTitle(text)}
+          onChangeText={(text: any) => handleChangeTitle(text)}
           style={styles.text}
           placeholder="Write a description"
         />
         <TextInput
           editable={edit}
           value={updateDescription}
-          onChangeText={(text: any) => setUpdateDescription(text)}
+          onChangeText={(text: any) => handleChangeDescription(text)}
           style={styles.text}
           placeholder="Write a description"
         />
-        {edit ? (
+        {hide ? (
           <>
             <TouchableOpacity
               onPress={() => {
@@ -67,7 +82,8 @@ const DetailTask = (props: any) => {
               </View>
             </TouchableOpacity>
           </>
-        ) : (
+        ) : null}
+        {!edit ? (
           <TouchableOpacity
             onPress={() => {
               handleEdit();
@@ -77,7 +93,7 @@ const DetailTask = (props: any) => {
               <Text style={styles.addText}>Sửa</Text>
             </View>
           </TouchableOpacity>
-        )}
+        ) : null}
       </View>
     </View>
   );
