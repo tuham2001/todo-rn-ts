@@ -1,4 +1,4 @@
-import { getTask } from './todoRedux';
+import { getTask } from "./todoRedux";
 
 export function addTask(task: any) {
   return function AddTask(dispatch: any, getState: any) {
@@ -18,7 +18,7 @@ export function deleteTask() {
 export function checkTask(newTask: any) {
   return function CheckTask(dispatch: any, getState: any) {
     const { taskList } = getState().user.todoReducer;
-    const newTaskList = [...taskList]
+    const newTaskList = [...taskList];
     newTaskList.map((task: any, index: number) => {
       if (task.id === newTask.id) {
         newTaskList[index] = newTask;
@@ -31,7 +31,7 @@ export function checkTask(newTask: any) {
 export function updateTask(newTask: any) {
   return function UpdateTask(dispatch: any, getState: any) {
     const { taskList } = getState().user.todoReducer;
-    const newTaskList = [...taskList]
+    const newTaskList = [...taskList];
     newTaskList.map((task: any, index: number) => {
       if (task.id === newTask.id) {
         newTaskList[index] = newTask;

@@ -8,9 +8,9 @@ export const todoSlice = createSlice({
   },
   reducers: {
     getTask: (state, action) => {
-      state.taskList = action.payload
+      state.taskList = action.payload;
     },
-  }
+  },
 });
 
 export const { getTask } = todoSlice.actions;

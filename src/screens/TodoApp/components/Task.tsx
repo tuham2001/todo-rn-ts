@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/core';
 import { checkTask } from '../../../redux/todo/todoThunk';
 
@@ -28,13 +28,25 @@ export default function Task(props: any) {
       <View style={styles.item}>
         <View style={styles.itemLeft}>
           <CheckBox
+            checkedIcon={
+              <Image
+                style={{ height: 20, width: 20 }}
+                source={require('../../../assets/check.jpg')}
+              />
+            }
+            uncheckedIcon={
+              <Image
+                style={{ height: 20, width: 20 }}
+                source={require('../../../assets/uncheck.jpg')}
+              />
+            }
+            size={0}
             title={'Check'}
             checked={task.isChecked}
             checkedTitle={'UnCheck'}
             checkedColor="orange"
             onPress={() => handleCheckTask()}
           />
-          {/* <TouchableOpacity style={styles.square}></TouchableOpacity> */}
           <Text style={styles.itemText}>{task.title}</Text>
         </View>
       </View>
