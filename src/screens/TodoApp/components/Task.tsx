@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/core';
@@ -8,7 +8,7 @@ import { dispatchStore } from '../../../redux/store';
 function Task(props: any) {
   const navigation = useNavigation();
   const { task } = props;
-  const handleCheckTask = () => {
+  const handleCheckTask = useCallback(() => {
     dispatchStore(
       checkTask({
         title: task.title,
@@ -17,7 +17,7 @@ function Task(props: any) {
         id: task.id,
       }),
     );
-  };
+  }, [task]);
   return (
     <TouchableOpacity
       onPress={() => {

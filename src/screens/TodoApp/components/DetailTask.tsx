@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { dispatchStore } from '../../../redux/store';
 import { updateTask } from '../../../redux/todo/todoThunk';
@@ -11,17 +11,18 @@ const DetailTask = (props: any) => {
   const [updateDescription, setUpdateDescription] = useState(task.description);
   const [saveTitle, setSaveTitle] = useState(task.title);
   const [saveDescription, setSaveDescription] = useState(task.description);
-  const handleEdit = () => {
-    // setHide(true);
+  const handleEdit = useCallback(() => {
     setEdit(true);
-  };
-  const handleCancel = () => {
+  }, []);
+  const handleCancel = useCallback(() => {
     setEdit(false);
     setHide(false);
     setUpdateTitle(saveTitle);
     setUpdateDescription(saveDescription);
-  };
-  const handleSave = () => {
+  }, [saveTitle, saveDescription]);
+  const handleSave = useCallback(() => {
+    setEdit(false);
+    setHide(false);
     dispatchStore(
       updateTask({
         title: updateTitle,
@@ -32,9 +33,7 @@ const DetailTask = (props: any) => {
     );
     setSaveTitle(updateTitle);
     setSaveDescription(updateDescription);
-    setEdit(false);
-    setHide(false);
-  };
+  }, [updateTitle, updateDescription, task.isChecked, task.id]);
   const handleChangeTitle = useCallback((text: any) => {
     setUpdateTitle(text);
     setHide(true);
@@ -177,4 +176,4 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
 });
-export default DetailTask;
+export default memo(DetailTask);
