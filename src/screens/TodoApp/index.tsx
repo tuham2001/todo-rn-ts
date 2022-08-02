@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, Alert, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -29,7 +29,7 @@ const TodoApp = () => {
   });
   const [hideDelete, setHideDelete] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const handleAddTask = () => {
+  const handleAddTask = useCallback(() => {
     dispatchStore(
       addTask({
         title: values.title,
@@ -40,11 +40,11 @@ const TodoApp = () => {
     );
     values.title = '';
     values.description = '';
-  };
-  const handleDeleteTask = () => {
+  }, [values]);
+  const handleDeleteTask = useCallback(() => {
     setModalVisible(!modalVisible);
     dispatchStore(deleteTask());
-  };
+  }, [modalVisible]);
   useEffect(() => {
     let count = 0;
     taskList.map((task: any) => {
