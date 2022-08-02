@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { dispatchStore } from '../../../redux/store';
 import { updateTask } from '../../../redux/todo/todoThunk';
@@ -35,14 +35,14 @@ const DetailTask = (props: any) => {
     setEdit(false);
     setHide(false);
   };
-  const handleChangeTitle = (text: any) => {
+  const handleChangeTitle = useCallback((text: any) => {
     setUpdateTitle(text);
     setHide(true);
-  };
-  const handleChangeDescription = (text: any) => {
+  }, []);
+  const handleChangeDescription = useCallback((text: any) => {
     setUpdateDescription(text);
     setHide(true);
-  };
+  }, []);
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>

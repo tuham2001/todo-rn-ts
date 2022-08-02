@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/core';
 import { checkTask } from '../../../redux/todo/todoThunk';
 import { dispatchStore } from '../../../redux/store';
 
-export default function Task(props: any) {
+function Task(props: any) {
   const navigation = useNavigation();
-
   const { task } = props;
   const handleCheckTask = () => {
     dispatchStore(
@@ -43,6 +42,7 @@ export default function Task(props: any) {
   );
 }
 
+export default memo(Task);
 const styles = StyleSheet.create({
   icon: {
     height: 20,
