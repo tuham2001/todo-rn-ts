@@ -6,9 +6,10 @@ import * as yup from 'yup';
 import { addTask } from '../../../redux/todo/todoThunk';
 import { getUuid } from '../../../utils/common/getUuid';
 import { dispatchStore } from '../../../redux/store';
+import { useNavigation } from '@react-navigation/core';
 
-const CreateTask = (props: any) => {
-  const { navigation } = props;
+const CreateTask = () => {
+  const navigation = useNavigation();
   const [disabled, setDisabled] = useState(true);
   const validationSchema = yup.object().shape({
     title: yup.string().required('Title is not empty'),
@@ -22,7 +23,7 @@ const CreateTask = (props: any) => {
       handleAddTask();
       setFieldTouched('title', false);
       setFieldTouched('description', false);
-      navigation.navigate('Home', { navigation });
+      navigation.navigate('Home');
     },
     validationSchema,
   });
