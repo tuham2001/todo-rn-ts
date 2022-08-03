@@ -157,9 +157,6 @@ const styles = StyleSheet.create({
     elevation: 2,
     margin: 5,
   },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
   buttonDelete: {
     backgroundColor: 'green',
   },

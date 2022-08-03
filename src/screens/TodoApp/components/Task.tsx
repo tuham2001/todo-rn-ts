@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { checkTask } from '../../../redux/todo/todoThunk';
 import { dispatchStore } from '../../../redux/store';
+import { IconButton } from 'react-native-paper';
 
 function Task(props: any) {
   const { task, navigation } = props;
@@ -23,16 +24,21 @@ function Task(props: any) {
       }}>
       <View style={styles.item}>
         <View style={styles.itemLeft}>
-          <View style={styles.checkBox}>
-            <CheckBox
-              checkedIcon={<Image style={styles.icon} source={require('../../../assets/check.png')} />}
-              uncheckedIcon={<Image style={styles.icon} source={require('../../../assets/uncheck.png')} />}
-              size={0}
-              checked={task.isChecked}
-              // checkedColor="orange"
-              onPress={() => handleCheckTask()}
-            />
-          </View>
+          {/* <CheckBox
+            checkedIcon={<Image style={styles.icon} source={require('../../../assets/check.png')} />}
+            uncheckedIcon={<Image style={styles.icon} source={require('../../../assets/uncheck.png')} />}
+            size={0}
+            checked={task.isChecked}
+            // checkedColor="orange"
+            onPress={() => handleCheckTask()}
+          /> */}
+          <IconButton
+            icon={require('../../../assets/check_white.png')}
+            size={15}
+            color={task.isChecked ? 'white' : '#E8EAED'}
+            style={{ backgroundColor: task.isChecked ? 'blue' : '#E8EAED' }}
+            onPress={() => handleCheckTask()}
+          />
           <Text style={task.isChecked ? styles.itemTextDecoration : styles.itemText}>{task.title}</Text>
         </View>
       </View>
@@ -42,9 +48,6 @@ function Task(props: any) {
 
 export default memo(Task);
 const styles = StyleSheet.create({
-  checkBox: {
-    // backgroundColor: '#eee',
-  },
   icon: {
     height: 20,
     width: 20,
@@ -64,10 +67,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   itemText: {
+    marginLeft: 20,
     fontSize: 20,
     maxWidth: '80%',
   },
   itemTextDecoration: {
+    marginLeft: 20,
     fontSize: 20,
     maxWidth: '80%',
     textDecorationLine: 'line-through',
