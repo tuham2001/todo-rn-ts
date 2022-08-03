@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { dispatchStore } from '../../../redux/store';
 import { updateTask } from '../../../redux/todo/todoThunk';
@@ -7,6 +7,7 @@ const DetailTask = (props: any) => {
   const { task } = props.route.params;
   const [edit, setEdit] = useState(false);
   const [hide, setHide] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [updateTitle, setUpdateTitle] = useState(task.title);
   const [updateDescription, setUpdateDescription] = useState(task.description);
   const [saveTitle, setSaveTitle] = useState(task.title);
@@ -42,6 +43,13 @@ const DetailTask = (props: any) => {
     setUpdateDescription(text);
     setHide(true);
   }, []);
+  useEffect(() => {
+    if (updateTitle !== '') {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [updateTitle]);
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
@@ -74,7 +82,8 @@ const DetailTask = (props: any) => {
               onPress={() => {
                 handleSave();
               }}
-              style={styles.save}>
+              disabled={disabled}
+              style={disabled ? styles.disabled : styles.save}>
               <View>
                 <Text style={styles.addText}>Save</Text>
               </View>
@@ -98,6 +107,17 @@ const DetailTask = (props: any) => {
 };
 
 const styles = StyleSheet.create({
+  disabled: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    width: '50%',
+    backgroundColor: '#cccccc',
+    borderRadius: 60,
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+    marginTop: 10,
+  },
   save: {
     paddingVertical: 15,
     paddingHorizontal: 15,

@@ -1,13 +1,11 @@
 import React, { memo, useCallback } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/core';
 import { checkTask } from '../../../redux/todo/todoThunk';
 import { dispatchStore } from '../../../redux/store';
 
 function Task(props: any) {
-  const navigation = useNavigation();
-  const { task } = props;
+  const { task, navigation } = props;
   const handleCheckTask = useCallback(() => {
     dispatchStore(
       checkTask({
@@ -25,16 +23,16 @@ function Task(props: any) {
       }}>
       <View style={styles.item}>
         <View style={styles.itemLeft}>
-          <CheckBox
-            checkedIcon={<Image style={styles.icon} source={require('../../../assets/check.jpg')} />}
-            uncheckedIcon={<Image style={styles.icon} source={require('../../../assets/uncheck.jpg')} />}
-            size={0}
-            title={'Check'}
-            checked={task.isChecked}
-            checkedTitle={'UnCheck'}
-            checkedColor="orange"
-            onPress={() => handleCheckTask()}
-          />
+          <View style={styles.checkBox}>
+            <CheckBox
+              checkedIcon={<Image style={styles.icon} source={require('../../../assets/check.png')} />}
+              uncheckedIcon={<Image style={styles.icon} source={require('../../../assets/uncheck.png')} />}
+              size={0}
+              checked={task.isChecked}
+              // checkedColor="orange"
+              onPress={() => handleCheckTask()}
+            />
+          </View>
           <Text style={styles.itemText}>{task.title}</Text>
         </View>
       </View>
@@ -44,6 +42,9 @@ function Task(props: any) {
 
 export default memo(Task);
 const styles = StyleSheet.create({
+  checkBox: {
+    // backgroundColor: '#eee',
+  },
   icon: {
     height: 20,
     width: 20,
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   itemText: {
+    fontSize: 20,
     maxWidth: '80%',
   },
 });

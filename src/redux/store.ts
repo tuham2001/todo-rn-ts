@@ -1,8 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import userReducer from './user/userRedux';
 import todoReducer from './todo/todoRedux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -15,23 +13,20 @@ import {
   // PURGE,
   // REGISTER,
 } from 'redux-persist';
-import rootSaga from './rootSaga';
 import { Dispatch } from 'react';
 
-const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
 };
 const rootReducer = combineReducers({
-  userReducer,
   todoReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   //  redux-thunk
-  middleware: [thunk, sagaMiddleware],
+  middleware: [thunk],
   //redux
   // middleware: getDefaultMiddleware({
   //   serializableCheck: {
@@ -42,7 +37,6 @@ const store = configureStore({
     user: persistedReducer,
   },
 });
-sagaMiddleware.run(rootSaga);
 export const persistor = persistStore(store);
 
 export default store;
