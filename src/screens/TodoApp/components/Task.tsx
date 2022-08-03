@@ -1,6 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { checkTask } from '../../../redux/todo/todoThunk';
 import { dispatchStore } from '../../../redux/store';
 import { IconButton } from 'react-native-paper';
@@ -24,14 +23,6 @@ function Task(props: any) {
       }}>
       <View style={styles.item}>
         <View style={styles.itemLeft}>
-          {/* <CheckBox
-            checkedIcon={<Image style={styles.icon} source={require('../../../assets/check.png')} />}
-            uncheckedIcon={<Image style={styles.icon} source={require('../../../assets/uncheck.png')} />}
-            size={0}
-            checked={task.isChecked}
-            // checkedColor="orange"
-            onPress={() => handleCheckTask()}
-          /> */}
           <IconButton
             icon={require('../../../assets/check_white.png')}
             size={15}

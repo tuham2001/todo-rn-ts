@@ -77,7 +77,7 @@ const Home = () => {
         size={40}
         color="white"
         onPress={() => {
-          navigation.navigate('CreateTask', { navigation });
+          navigation.navigate('CreateTask', { navigation: navigation });
         }}
       />
     </View>
