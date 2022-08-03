@@ -33,7 +33,7 @@ function Task(props: any) {
               onPress={() => handleCheckTask()}
             />
           </View>
-          <Text style={styles.itemText}>{task.title}</Text>
+          <Text style={task.isChecked ? styles.itemTextDecoration : styles.itemText}>{task.title}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -66,5 +66,10 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 20,
     maxWidth: '80%',
+  },
+  itemTextDecoration: {
+    fontSize: 20,
+    maxWidth: '80%',
+    textDecorationLine: 'line-through',
   },
 });

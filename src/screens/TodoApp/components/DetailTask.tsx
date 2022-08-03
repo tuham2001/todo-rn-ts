@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { dispatchStore } from '../../../redux/store';
 import { updateTask } from '../../../redux/todo/todoThunk';
 
@@ -51,62 +51,72 @@ const DetailTask = (props: any) => {
     }
   }, [updateTitle]);
   return (
-    <View style={styles.item}>
-      <View style={styles.itemLeft}>
-        <TextInput
-          editable={edit}
-          value={updateTitle}
-          onChangeText={(text: any) => handleChangeTitle(text)}
-          style={styles.text}
-          placeholder="Write a description"
-        />
-        <TextInput
-          editable={edit}
-          value={updateDescription}
-          onChangeText={(text: any) => handleChangeDescription(text)}
-          style={styles.text}
-          placeholder="Write a description"
-        />
-        {hide ? (
-          <>
-            <TouchableOpacity
-              onPress={() => {
-                handleCancel();
-              }}
-              style={styles.cancel}>
-              <View>
-                <Text style={styles.addText}>Cancel</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                handleSave();
-              }}
-              disabled={disabled}
-              style={disabled ? styles.disabled : styles.save}>
-              <View>
-                <Text style={styles.addText}>Save</Text>
-              </View>
-            </TouchableOpacity>
-          </>
-        ) : null}
-        {!edit ? (
+    <View style={styles.flex}>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <View style={styles.item}>
+          <View style={styles.itemLeft}>
+            <TextInput
+              editable={edit}
+              value={updateTitle}
+              onChangeText={(text: any) => handleChangeTitle(text)}
+              style={styles.text}
+              placeholder="Write a description"
+            />
+            <TextInput
+              editable={edit}
+              value={updateDescription}
+              onChangeText={(text: any) => handleChangeDescription(text)}
+              style={styles.text}
+              placeholder="Write a description"
+            />
+          </View>
+        </View>
+      </ScrollView>
+      {hide ? (
+        <View style={styles.row}>
           <TouchableOpacity
             onPress={() => {
-              handleEdit();
+              handleCancel();
             }}
-            style={styles.addWrapper}>
+            style={styles.cancel}>
             <View>
-              <Text style={styles.addText}>Sửa</Text>
+              <Text style={styles.addText}>Cancel</Text>
             </View>
           </TouchableOpacity>
-        ) : null}
-      </View>
+          <TouchableOpacity
+            onPress={() => {
+              handleSave();
+            }}
+            disabled={disabled}
+            style={disabled ? styles.disabled : styles.save}>
+            <View>
+              <Text style={styles.addText}>Save</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      ) : null}
+      {!edit ? (
+        <TouchableOpacity
+          onPress={() => {
+            handleEdit();
+          }}
+          style={styles.addWrapper}>
+          <View>
+            <Text style={styles.addText}>Sửa</Text>
+          </View>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+  },
+  flex: {
+    flex: 1,
+  },
   disabled: {
     paddingVertical: 15,
     paddingHorizontal: 15,
@@ -121,35 +131,38 @@ const styles = StyleSheet.create({
   save: {
     paddingVertical: 15,
     paddingHorizontal: 15,
-    width: '50%',
+    width: '45%',
     backgroundColor: 'green',
     borderRadius: 60,
     alignItems: 'center',
     borderColor: '#C0C0C0',
     borderWidth: 1,
-    marginTop: 10,
+    marginBottom: 30,
+    marginRight: 20,
   },
   cancel: {
     paddingVertical: 15,
     paddingHorizontal: 15,
-    width: '50%',
+    width: '45%',
     backgroundColor: 'white',
     borderRadius: 60,
     alignItems: 'center',
     borderColor: '#C0C0C0',
     borderWidth: 1,
-    marginTop: 10,
+    marginBottom: 30,
+    marginLeft: 20,
+    marginRight: 10,
   },
   addWrapper: {
     paddingVertical: 15,
     paddingHorizontal: 15,
-    width: '100%',
     backgroundColor: 'orange',
     borderRadius: 60,
     alignItems: 'center',
     borderColor: '#C0C0C0',
     borderWidth: 1,
-    marginTop: 10,
+    marginBottom: 30,
+    marginHorizontal: 20,
   },
   addText: {
     fontSize: 20,
