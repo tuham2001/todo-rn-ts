@@ -27,7 +27,7 @@ function Task(props: any) {
             icon={require('../../../assets/check_white.png')}
             size={15}
             color={task.isChecked ? 'white' : '#E8EAED'}
-            style={{ backgroundColor: task.isChecked ? 'blue' : '#E8EAED' }}
+            style={{ backgroundColor: task.isChecked ? '#0079bf' : '#E8EAED' }}
             onPress={() => handleCheckTask()}
           />
           <Text style={task.isChecked ? styles.itemTextDecoration : styles.itemText}>{task.title}</Text>
