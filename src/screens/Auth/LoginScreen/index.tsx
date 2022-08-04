@@ -1,14 +1,14 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { Alert, View, StyleSheet, Text, TextInput, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Button, IconButton } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/core';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import { dispatchStore } from '../../../redux/store';
-import { login } from '../../../redux/user/userRedux';
+import { login } from '../../../redux/user/userThunk';
 
 const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);

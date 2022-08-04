@@ -7,7 +7,7 @@ import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/core';
 import { dispatchStore } from '../../redux/store';
 import { deleteTask } from '../../redux/todo/todoThunk';
-import { logout } from '../../redux/user/userRedux';
+import { logout } from '../../redux/user/userThunk';
 
 const Home = () => {
   const navigation = useNavigation();

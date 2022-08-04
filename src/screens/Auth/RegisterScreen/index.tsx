@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/core';
 import Header from '../components/Header';
-import { Button, IconButton } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { dispatchStore } from '../../../redux/store';
 import { register } from '../../../redux/user/userRedux';
 import LinearGradient from 'react-native-linear-gradient';
