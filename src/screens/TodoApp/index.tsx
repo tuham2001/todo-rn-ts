@@ -7,12 +7,17 @@ import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/core';
 import { dispatchStore } from '../../redux/store';
 import { deleteTask } from '../../redux/todo/todoThunk';
+import { logout } from '../../redux/user/userRedux';
 
 const Home = () => {
   const navigation = useNavigation();
   const taskList = useSelector((state: any) => state.user.todoReducer.taskList);
   const [hideDelete, setHideDelete] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const onLogoutPressed = () => {
+    dispatchStore(logout());
+    navigation.navigate('LoginScreen');
+  };
   useEffect(() => {
     let count = 0;
     taskList.map((task: any) => {
@@ -34,6 +39,11 @@ const Home = () => {
     <View style={styles.flex}>
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
         <View style={styles.tasksWrapper}>
+          <View style={styles.viewDelete}>
+            <TouchableOpacity style={styles.logout} onPress={() => onLogoutPressed()}>
+              <Text>Đăng xuất</Text>
+            </TouchableOpacity>
+          </View>
           <Text style={styles.sectionTitle}>Todo list app</Text>
           {hideDelete ? (
             <View style={styles.viewDelete}>
@@ -93,6 +103,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+  },
+  logout: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    width: '30%',
+    backgroundColor: '#FF5789',
+    borderRadius: 60,
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+    marginTop: 10,
+    textAlign: 'center',
   },
   delete: {
     paddingVertical: 15,
