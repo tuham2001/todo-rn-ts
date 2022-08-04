@@ -5,6 +5,7 @@ import { Button, IconButton } from 'react-native-paper';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/core';
+import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import { dispatchStore } from '../../../redux/store';
 import { login } from '../../../redux/user/userRedux';
@@ -81,18 +82,22 @@ const LoginScreen = () => {
           />
         </View>
         {errors.password && touched.password ? <Text style={styles.error}>{errors.password}</Text> : null}
-        <TouchableOpacity>
-          <View style={styles.forgot}>
+        <View style={styles.forgot}>
+          <TouchableOpacity>
             <Text style={styles.textStyle}>Forget password ?</Text>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
         {isLoading ? (
           <ActivityIndicator size="large" color={'black'} />
         ) : (
           <TouchableOpacity onPress={() => handleSubmit()}>
-            <Button style={styles.btnLogin} mode="contained">
+            <LinearGradient
+              start={{ x: 0.072, y: 0.0 }}
+              end={{ x: 0.9717, y: 0.0 }}
+              style={styles.btnLogin}
+              colors={['#FF5789', '#FF9B9C']}>
               <Text style={styles.textLoginBtn}>Log In</Text>
-            </Button>
+            </LinearGradient>
           </TouchableOpacity>
         )}
         <View style={styles.signUp}>
@@ -197,6 +202,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 18,
     lineHeight: 20,
+    color: '#FFFFFF',
   },
   btnFace: {
     marginTop: 32,
@@ -216,11 +222,11 @@ const styles = StyleSheet.create({
   },
   btnLogin: {
     marginTop: 32,
-    backgroundColor: '#FF5789',
     borderRadius: 30,
     height: 52,
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   forgot: {
     marginTop: 14,

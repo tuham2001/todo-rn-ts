@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import { Button, IconButton } from 'react-native-paper';
 import { dispatchStore } from '../../../redux/store';
 import { register } from '../../../redux/user/userRedux';
+import LinearGradient from 'react-native-linear-gradient';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -134,9 +135,13 @@ const RegisterScreen = () => {
       </ScrollView>
       <View style={styles.container}>
         <TouchableOpacity onPress={handleSubmit}>
-          <Button style={styles.btnLogin} mode="contained">
-            <Text style={styles.textLoginBtn}>Register</Text>
-          </Button>
+          <LinearGradient
+            start={{ x: 0.072, y: 0.0 }}
+            end={{ x: 0.9717, y: 0.0 }}
+            style={styles.btnLogin}
+            colors={['#FF5789', '#FF9B9C']}>
+            <Text style={styles.textLoginBtn}>Register In</Text>
+          </LinearGradient>
         </TouchableOpacity>
         <View style={styles.signUp}>
           <View style={styles.flexRow}>
@@ -219,6 +224,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 18,
     lineHeight: 20,
+    color: '#FFFFFF',
   },
   btnFace: {
     marginTop: 32,
@@ -237,11 +243,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnLogin: {
-    backgroundColor: '#FF5789',
     borderRadius: 30,
     height: 52,
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   forgot: {
     marginTop: 14,
