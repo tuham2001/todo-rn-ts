@@ -14,12 +14,12 @@ const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   const validationSchema = yup.object().shape({
-    username: yup.string().required('Username is not empty').min(2, 'Password longer than 2 characters'),
-    password: yup.string().min(5).required('Password is not empty').min(6, 'Password longer than 6 characters'),
+    email: yup.string().required('Email is not empty').email('Must be a valid email'),
+    password: yup.string().required('Password is not empty').min(6, 'Password longer than 6 characters'),
   });
   const { values, handleChange, handleBlur, handleSubmit, touched, errors } = useFormik({
     initialValues: {
-      username: '',
+      email: '',
       password: '',
     },
     onSubmit: () => {
@@ -28,14 +28,14 @@ const LoginScreen = () => {
         () =>
           dispatchStore(
             login({
-              name: values.username,
+              email: values.email,
               password: values.password,
               loggedIn: true,
             }),
           ),
         1000,
       );
-      if (values.username && values.password && values.username === 'pro' && values.password === '123123') {
+      if (values.email && values.password && values.email === 'pro@gmail.com' && values.password === '123123') {
         navigation.navigate('Home');
         setTimeout(() => setIsLoading(false), 1000);
       } else {
@@ -60,15 +60,15 @@ const LoginScreen = () => {
         <View style={styles.searchSection}>
           <IconButton icon={require('../../../assets/ic_mail.png')} style={styles.icMail} size={24} color="#A4BCC1" />
           <TextInput
-            value={values.username}
-            onChangeText={handleChange('username')}
+            value={values.email}
+            onChangeText={handleChange('email')}
             style={styles.input}
             placeholder="Email"
             placeholderTextColor={'#828187'}
-            onBlur={handleBlur('username')}
+            onBlur={handleBlur('email')}
           />
         </View>
-        {errors.username && touched.username ? <Text style={styles.error}>{errors.username}</Text> : null}
+        {errors.email && touched.email ? <Text style={styles.error}>{errors.email}</Text> : null}
         <View style={styles.searchSection}>
           <IconButton icon={require('../../../assets/ic_pass.png')} style={styles.icMail} size={24} color="#A4BCC1" />
           <TextInput

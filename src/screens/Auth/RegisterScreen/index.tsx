@@ -15,7 +15,7 @@ const RegisterScreen = () => {
   const validationSchema = yup.object().shape({
     firstname: yup.string().required('Firstname is not empty'),
     lastname: yup.string().required('Lastname is not empty'),
-    username: yup.string().required('Username is not empty').min(2, 'Password longer than 2 characters'),
+    email: yup.string().required('Email is not empty').email('Must be a valid email'),
     password: yup.string().min(5).required('Password is not empty').min(6, 'Password longer than 6 characters'),
   });
   const [isChecked, setIsChecked] = useState(false);
@@ -23,7 +23,7 @@ const RegisterScreen = () => {
     initialValues: {
       firstname: '',
       lastname: '',
-      username: '',
+      email: '',
       password: '',
     },
     onSubmit: () => {
@@ -90,15 +90,15 @@ const RegisterScreen = () => {
           <View style={styles.searchSection}>
             <IconButton icon={require('../../../assets/ic_mail.png')} style={styles.icMail} size={24} color="#A4BCC1" />
             <TextInput
-              value={values.username}
-              onChangeText={handleChange('username')}
+              value={values.email}
+              onChangeText={handleChange('email')}
               style={styles.input}
               placeholder="Email"
               placeholderTextColor={'#828187'}
-              onBlur={handleBlur('username')}
+              onBlur={handleBlur('email')}
             />
           </View>
-          {errors.username && touched.username ? <Text style={styles.error}>{errors.username}</Text> : null}
+          {errors.email && touched.email ? <Text style={styles.error}>{errors.email}</Text> : null}
           <View style={styles.searchSection}>
             <IconButton icon={require('../../../assets/ic_pass.png')} style={styles.icMail} size={24} color="#A4BCC1" />
             <TextInput

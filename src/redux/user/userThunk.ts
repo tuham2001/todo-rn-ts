@@ -4,8 +4,8 @@ import base64 from 'react-native-base64';
 
 export function login(user: any) {
   return function Login(dispatch: any) {
-    const authHeader = 'Basic ' + base64.encode(`${user.name}:${user.password}`);
-    const session_url = 'https://httpbin.org/basic-auth/pro/123123';
+    const authHeader = 'Basic ' + base64.encode(`${user.email}:${user.password}`);
+    const session_url = 'https://httpbin.org/basic-auth/pro@gmail.com/123123';
     Axios({
       method: 'GET',
       url: session_url,
@@ -13,7 +13,7 @@ export function login(user: any) {
     })
       .then((res) => {
         dispatch(loginSuccess(user));
-        console.log('Thành công');
+        console.log('Thành công', res);
       })
       .catch((err) => {
         console.log(err.message);
