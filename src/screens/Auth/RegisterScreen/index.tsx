@@ -295,76 +295,8 @@ const styles = StyleSheet.create({
   flexRow: {
     flexDirection: 'row',
   },
-  viewDelete: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-  },
-  delete: {
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    width: '30%',
-    backgroundColor: 'red',
-    borderRadius: 60,
-    alignItems: 'center',
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
-    marginTop: 10,
-    textAlign: 'center',
-  },
   flex: {
     flex: 1,
-  },
-  floatinBtn: {
-    position: 'absolute',
-    bottom: 30,
-    right: 20,
-    backgroundColor: 'orange',
-  },
-  tasksWrapper: {
-    paddingTop: 40,
-    paddingHorizontal: 20,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  items: {
-    marginTop: 30,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    margin: 5,
-  },
-  buttonDelete: {
-    backgroundColor: 'green',
-  },
-  buttonClose: {
-    backgroundColor: 'red',
   },
   textStyle: {
     fontFamily: 'Outfit',
@@ -373,10 +305,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     color: '#FFFFFF',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
   },
 });
 export default RegisterScreen;
