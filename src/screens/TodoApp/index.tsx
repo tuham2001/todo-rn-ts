@@ -1,15 +1,16 @@
-import 'react-native-gesture-handler';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, Alert, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
 import Task from './components/Task';
 import { IconButton } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, DrawerActions } from '@react-navigation/core';
 import { dispatchStore } from '../../redux/store';
 import { deleteTask } from '../../redux/todo/todoThunk';
 import { logout } from '../../redux/user/userThunk';
+import LinearGradient from 'react-native-linear-gradient';
 
-const Home = () => {
+const Home = (props: any) => {
+  const { drawer } = props;
   const navigation = useNavigation();
   const taskList = useSelector((state: any) => state.user.todoReducer.taskList);
   const [hideDelete, setHideDelete] = useState(false);
@@ -37,28 +38,39 @@ const Home = () => {
   }, [modalVisible]);
   return (
     <View style={styles.flex}>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
-        <View style={styles.tasksWrapper}>
-          <View style={styles.viewDelete}>
-            <TouchableOpacity style={styles.logout} onPress={() => onLogoutPressed()}>
-              <Text>Đăng xuất</Text>
+      <LinearGradient
+        start={{ x: 0, y: 0.0 }}
+        end={{ x: 1, y: 0.0 }}
+        style={styles.containerDrawer}
+        colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={drawer ? styles.containerDrawer : styles.container}>
+          <View style={styles.tasksWrapper}>
+            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+              <Text>Menu</Text>
             </TouchableOpacity>
-          </View>
-          <Text style={styles.sectionTitle}>Todo list app</Text>
-          {hideDelete ? (
             <View style={styles.viewDelete}>
-              <TouchableOpacity style={styles.delete} onPress={() => setModalVisible(true)}>
-                <Text>Xóa</Text>
+              <TouchableOpacity style={styles.logout} onPress={() => onLogoutPressed()}>
+                <Text>Đăng xuất</Text>
               </TouchableOpacity>
             </View>
-          ) : null}
-          <View style={styles.items}>
-            {taskList.map((item: any, index: number) => {
-              return <Task navigation={navigation} task={item} key={index} />;
-            })}
+            <Text style={styles.sectionTitle}>Todo list app</Text>
+            {hideDelete ? (
+              <View style={styles.viewDelete}>
+                <TouchableOpacity style={styles.delete} onPress={() => setModalVisible(true)}>
+                  <Text>Xóa</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
+            <View style={styles.items}>
+              {taskList.map((item: any, index: number) => {
+                return <Task navigation={navigation} task={item} key={index} />;
+              })}
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </LinearGradient>
       <Modal
         animationType="slide"
         transparent={true}
@@ -138,6 +150,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange',
   },
   container: {
+    flex: 1,
+    backgroundColor: '#E8EAED',
+  },
+  containerDrawer: {
+    shadowColor: '#00000030',
+    shadowOffset: {
+      width: 74,
+      height: 74,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 74,
+    borderRadius: 20,
     flex: 1,
     backgroundColor: '#E8EAED',
   },

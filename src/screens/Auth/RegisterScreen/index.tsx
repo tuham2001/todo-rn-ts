@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useFormik } from 'formik';

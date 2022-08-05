@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { Alert, View, StyleSheet, Text, TextInput, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { IconButton } from 'react-native-paper';
@@ -36,7 +35,7 @@ const LoginScreen = () => {
         1000,
       );
       if (values.email && values.password && values.email === 'pro@gmail.com' && values.password === '123123') {
-        navigation.navigate('Home');
+        navigation.navigate('HomeDrawer');
         setTimeout(() => setIsLoading(false), 1000);
       } else {
         setIsLoading(false);
