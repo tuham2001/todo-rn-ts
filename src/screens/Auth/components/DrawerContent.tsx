@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   home: {
     width: '100%',
     height: '100%',
-    marginLeft: 20,
+    marginLeft: 40,
   },
   text: {
     fontFamily: 'Outfit',
