@@ -41,36 +41,33 @@ const Home = (props: any) => {
       <LinearGradient
         start={{ x: 0, y: 0.0 }}
         end={{ x: 1, y: 0.0 }}
-        style={styles.containerDrawer}
-        colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={drawer ? styles.containerDrawer : styles.container}>
-          <View style={styles.tasksWrapper}>
-            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-              <Text>Menu</Text>
+        style={styles.card}
+        colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}></LinearGradient>
+      <ScrollView contentInsetAdjustmentBehavior="automatic" style={drawer ? styles.borderDrawer : styles.container}>
+        <View style={styles.tasksWrapper}>
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <Text>Menu</Text>
+          </TouchableOpacity>
+          <View style={styles.viewDelete}>
+            <TouchableOpacity style={styles.logout} onPress={() => onLogoutPressed()}>
+              <Text>Đăng xuất</Text>
             </TouchableOpacity>
+          </View>
+          <Text style={styles.sectionTitle}>Todo list app</Text>
+          {hideDelete ? (
             <View style={styles.viewDelete}>
-              <TouchableOpacity style={styles.logout} onPress={() => onLogoutPressed()}>
-                <Text>Đăng xuất</Text>
+              <TouchableOpacity style={styles.delete} onPress={() => setModalVisible(true)}>
+                <Text>Xóa</Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.sectionTitle}>Todo list app</Text>
-            {hideDelete ? (
-              <View style={styles.viewDelete}>
-                <TouchableOpacity style={styles.delete} onPress={() => setModalVisible(true)}>
-                  <Text>Xóa</Text>
-                </TouchableOpacity>
-              </View>
-            ) : null}
-            <View style={styles.items}>
-              {taskList.map((item: any, index: number) => {
-                return <Task navigation={navigation} task={item} key={index} />;
-              })}
-            </View>
+          ) : null}
+          <View style={styles.items}>
+            {taskList.map((item: any, index: number) => {
+              return <Task navigation={navigation} task={item} key={index} />;
+            })}
           </View>
-        </ScrollView>
-      </LinearGradient>
+        </View>
+      </ScrollView>
       <Modal
         animationType="slide"
         transparent={true}
@@ -107,6 +104,16 @@ const Home = (props: any) => {
 };
 
 const styles = StyleSheet.create({
+  card: {
+    position: 'absolute',
+    left: -14,
+    top: 25,
+    backgroundColor: '#00000030',
+    borderRadius: 8,
+    width: 297,
+    height: 570,
+  },
+
   row: {
     flexDirection: 'row',
   },
@@ -153,15 +160,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E8EAED',
   },
+  borderDrawer: {
+    borderRadius: 20,
+    flex: 1,
+    backgroundColor: '#E8EAED',
+  },
   containerDrawer: {
-    shadowColor: '#00000030',
+    // shadowColor: 'rgba(0, 0, 0, 0.2)',
+    shadowColor: 'red',
     shadowOffset: {
-      width: 74,
-      height: 74,
+      width: -40,
+      height: -40,
     },
     shadowOpacity: 1,
     shadowRadius: 20,
-    elevation: 74,
+    elevation: 40,
     borderRadius: 20,
     flex: 1,
     backgroundColor: '#E8EAED',
