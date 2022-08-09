@@ -38,11 +38,15 @@ const Home = (props: any) => {
   }, [modalVisible]);
   return (
     <View style={styles.flex}>
-      <LinearGradient
-        start={{ x: 0, y: 0.0 }}
-        end={{ x: 1, y: 0.0 }}
-        style={styles.card}
-        colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}></LinearGradient>
+      {drawer ? (
+        <LinearGradient
+          start={{ x: 0, y: 0.0 }}
+          end={{ x: 1, y: 0.0 }}
+          style={styles.card}
+          colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
+          <></>
+        </LinearGradient>
+      ) : null}
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={drawer ? styles.borderDrawer : styles.container}>
         <View style={styles.tasksWrapper}>
           <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
@@ -112,6 +116,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 297,
     height: 570,
+    opacity: 0.5,
   },
 
   row: {
