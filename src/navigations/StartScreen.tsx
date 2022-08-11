@@ -10,6 +10,7 @@ import LoginScreen from '../screens/Auth/LoginScreen';
 import RegisterScreen from '../screens/Auth/RegisterScreen';
 
 import DrawerContent from '../screens/Auth/components/DrawerContent';
+import MyStreaks from '../screens/Menu/MyStreaks';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -31,13 +32,20 @@ const HomeDrawer = () => {
         name="Home"
         component={Home}
       />
+      <Drawer.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="MyStreaks"
+        component={MyStreaks}
+      />
     </Drawer.Navigator>
   );
 };
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="HomeDrawer">
         {/* <Stack.Screen
           options={{
             headerShown: false,

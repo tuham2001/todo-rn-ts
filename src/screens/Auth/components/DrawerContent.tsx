@@ -8,6 +8,9 @@ import Home from '../../TodoApp';
 
 const DrawerContent = () => {
   const navigation = useNavigation();
+  const handleRegister = () => {
+    navigation.navigate('MyStreaks');
+  };
   return (
     <View style={styles.flex}>
       <DrawerContentScrollView>
@@ -37,6 +40,10 @@ const DrawerContent = () => {
                     <Text style={styles.textActive}>Home</Text>
                   </View>
                 </LinearGradient>
+                <TouchableOpacity onPress={() => handleRegister()} style={[styles.row, styles.bgActive]}>
+                  <Image source={require('../../../assets/ic_menu_2.png')} style={styles.icMenu} />
+                  <Text style={styles.text}>My streaks</Text>
+                </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
                   <Image source={require('../../../assets/ic_menu_2.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Reminder</Text>
