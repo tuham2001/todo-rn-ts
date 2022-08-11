@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const INITIAL_DATE = '2022-10-05';
 const monthNames = [
   'January',
   'February',
@@ -20,11 +19,12 @@ const monthNames = [
   'December',
 ];
 const Calendars = () => {
-  const [selected, setSelected] = useState(INITIAL_DATE);
+  const [selectedEnd, setSelectedEnd] = useState('');
+  const [selectedStart, setSelectedStart] = useState('');
   const [nowMonth, setNowMonth] = useState(10);
   const marked = useMemo(() => {
     return {
-      ['2022-10-03']: {
+      [selectedStart]: {
         // selected: true,
         // disableTouchEvent: true,
         startingDay: true,
@@ -32,8 +32,8 @@ const Calendars = () => {
         color: '#FF5789',
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
       },
-      ['2022-10-04']: { color: 'rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.2)', textColor: 'white' },
-      [selected]: {
+      // ['2022-10-04']: { color: 'rgba(0, 0, 0, 0.2)', textColor: 'white' },
+      [selectedEnd]: {
         selected: true,
         // startingDay: true,
         endingDay: true,
@@ -41,16 +41,33 @@ const Calendars = () => {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
       },
     };
-  }, [selected]);
-  const onDayPress = (day: any) => {
-    setSelected(day.dateString);
-  };
-
+  }, [selectedEnd, selectedStart]);
+  const onDayPress = useCallback(
+    (day: any) => {
+      if (selectedStart === '') {
+        setSelectedStart(day.dateString);
+      }
+      if (selectedEnd === '' && selectedStart !== '') {
+        setSelectedEnd(day.dateString);
+      }
+      if (selectedEnd !== '' && selectedStart !== '') {
+        setSelectedStart(day.dateString);
+        setSelectedEnd('');
+      }
+    },
+    [selectedStart, selectedEnd],
+  );
+  useEffect(() => {
+    if (Date.parse(selectedStart) > Date.parse(selectedEnd)) {
+      setSelectedEnd(selectedStart);
+      setSelectedStart(selectedEnd);
+    }
+  }, [selectedStart, selectedEnd]);
   const onMonthChange = (date: any) => {
-    setNowMonth(date.month - 1);
+    setNowMonth(date.month);
   };
   return (
-    <View style={{ margin: 20 }}>
+    <View style={styles.m20}>
       <Calendar
         // firstDay={1}
         theme={{
@@ -84,9 +101,6 @@ const Calendars = () => {
               alignSelf: 'stretch',
               alignItems: 'center',
             },
-            selected: {
-              backgroundColor: 'red',
-            },
           },
         }}
         renderArrow={(direction) => {
@@ -94,9 +108,9 @@ const Calendars = () => {
             <View style={styles.container}>
               <TouchableOpacity>
                 {direction === 'left' ? (
-                  <Text style={styles.textMonthLeft}>{monthNames[nowMonth - 1]}</Text>
+                  <Text style={styles.textMonthLeft}>{monthNames[nowMonth - 2]}</Text>
                 ) : (
-                  <Text style={styles.textMonthRight}>{monthNames[nowMonth + 1]}</Text>
+                  <Text style={styles.textMonthRight}>{monthNames[nowMonth]}</Text>
                 )}
               </TouchableOpacity>
             </View>
@@ -116,26 +130,46 @@ const Calendars = () => {
             </View>
           );
         }}
-        // dayComponent={(e: any) => {
-        //   return (
-        //     <TouchableOpacity
-        //       style={
-        //         e.date.dateString === selected || e.date.dateString === '2022-10-03'
-        //           ? styles.viewSelect
-        //           : styles.viewDay
-        //       }
-        //       onPress={() => onDayPress(e.date)}>
-        //       {e.date.month >= nowMonth ? (
-        //         <Text style={styles.textDay}>{e.date.day}</Text>
-        //       ) : (
-        //         <Text style={styles.prevTextDay}>{e.date.day}</Text>
-        //       )}
-        //     </TouchableOpacity>
-        //   );
-        // }}
+        dayComponent={(e: any) => {
+          return (
+            <TouchableOpacity onPress={() => onDayPress(e.date)}>
+              {e.date.month >= nowMonth ? (
+                <View>
+                  {Date.parse(e.date.dateString) < Date.parse(selectedEnd) &&
+                    Date.parse(e.date.dateString) > Date.parse(selectedStart) ? (
+                    <View style={styles.midSelect}>
+                      <Text style={styles.textDay}>{e.date.day}</Text>
+                    </View>
+                  ) : (
+                    <View>
+                      {selectedEnd !== '' && Date.parse(e.date.dateString) === Date.parse(selectedStart) ? (
+                        <View style={styles.startingStyles}></View>
+                      ) : null}
+                      {selectedStart !== '' && Date.parse(e.date.dateString) === Date.parse(selectedEnd) ? (
+                        <View style={styles.EndingStyles}></View>
+                      ) : null}
+                      <View
+                        style={
+                          e.date.dateString === selectedStart || e.date.dateString === selectedEnd
+                            ? styles.viewSelect
+                            : styles.viewDay
+                        }>
+                        <Text style={styles.textDay}>{e.date.day}</Text>
+                      </View>
+                    </View>
+                  )}
+                </View>
+              ) : (
+                <View style={styles.viewDay}>
+                  <Text style={styles.prevTextDay}>{e.date.day}</Text>
+                </View>
+              )}
+            </TouchableOpacity>
+          );
+        }}
         monthFormat="MMMM"
         enableSwipeMonths
-        current={INITIAL_DATE}
+        current={'2020-10-10'}
         onDayPress={onDayPress}
         markedDates={marked}
         markingType={'period'}
@@ -145,6 +179,31 @@ const Calendars = () => {
 };
 
 const styles = StyleSheet.create({
+  m20: {
+    margin: 20,
+  },
+  EndingStyles: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    width: 50,
+    height: 44,
+    position: 'absolute',
+    right: 32,
+  },
+  startingStyles: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    width: 50,
+    height: 44,
+    position: 'absolute',
+    left: 32,
+  },
+  midSelect: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 49.5,
+    height: 40,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+  },
   container: {
     marginTop: 10,
     marginBottom: 30,
@@ -195,7 +254,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 40,
+    width: 49.5,
     height: 40,
     borderRadius: 30,
     backgroundColor: '#FF5789',
