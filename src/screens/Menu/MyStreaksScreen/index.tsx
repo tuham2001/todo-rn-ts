@@ -2,21 +2,19 @@ import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Calendars from './components/Calendars';
+import Header from '../components/Header';
 
-const MyStreaks = () => {
+const MyStreaksScreen = () => {
   return (
     <View style={styles.bgColor}>
-      <View style={[styles.flexRow, styles.header]}>
-        <Image source={require('../../assets/ic_left.png')} style={styles.icLeft} />
-        <Text style={styles.textHeader}>My streaks</Text>
-      </View>
+      <Header header="My Streaks" />
       <LinearGradient
         start={{ x: 0, y: 0.0 }}
         end={{ x: 1.3643, y: 0.0 }}
         style={styles.streak}
         colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
         <View style={styles.flexRow}>
-          <Image source={require('../../assets/ic_myStreaks.png')} style={styles.icHeader} />
+          <Image source={require('../../../assets/ic_myStreaks.png')} style={styles.icHeader} />
           <View>
             <Text style={[styles.textWhite, styles.mt14]}>Current streak: 1</Text>
             <Text style={[styles.textLongest, styles.mt2]}>Longest streak: 2</Text>
@@ -94,4 +92,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default MyStreaks;
+export default MyStreaksScreen;

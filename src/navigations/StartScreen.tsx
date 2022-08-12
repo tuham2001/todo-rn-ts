@@ -9,8 +9,10 @@ import CreateTask from '../screens/TodoApp/components/CreateTask';
 import LoginScreen from '../screens/Auth/LoginScreen';
 import RegisterScreen from '../screens/Auth/RegisterScreen';
 
-import DrawerContent from '../screens/Auth/components/DrawerContent';
-import MyStreaks from '../screens/Menu/MyStreaks';
+import MyStreaksScreen from '../screens/Menu/MyStreaksScreen';
+import SettingsScreen from '../screens/Menu/SettingsScreen';
+import MenuScreen from '../screens/Menu';
+import UserInfoScreen from '../screens/Menu/UserInfoScreen';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -23,7 +25,7 @@ const HomeDrawer = () => {
           width: '100%',
         },
       }}
-      drawerContent={(props) => <DrawerContent {...props} />}
+      drawerContent={(props) => <MenuScreen {...props} />}
       initialRouteName="Home">
       <Drawer.Screen
         options={{
@@ -36,8 +38,22 @@ const HomeDrawer = () => {
         options={{
           headerShown: false,
         }}
-        name="MyStreaks"
-        component={MyStreaks}
+        name="MyStreaksScreen"
+        component={MyStreaksScreen}
+      />
+      <Drawer.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="SettingsScreen"
+        component={SettingsScreen}
+      />
+      <Drawer.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="UserInfoScreen"
+        component={UserInfoScreen}
       />
     </Drawer.Navigator>
   );

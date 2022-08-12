@@ -1,23 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
-const monthNames = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October ',
-  'November',
-  'December',
-];
+import moment from 'moment';
 const Calendars = () => {
   const [selectedEnd, setSelectedEnd] = useState('');
   const [selectedStart, setSelectedStart] = useState('');
@@ -28,14 +15,11 @@ const Calendars = () => {
         // selected: true,
         // disableTouchEvent: true,
         startingDay: true,
-        // endingDay: true,
         color: '#FF5789',
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
       },
-      // ['2022-10-04']: { color: 'rgba(0, 0, 0, 0.2)', textColor: 'white' },
       [selectedEnd]: {
         selected: true,
-        // startingDay: true,
         endingDay: true,
         color: '#FF5789',
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
@@ -69,7 +53,6 @@ const Calendars = () => {
   return (
     <View style={styles.m20}>
       <Calendar
-        // firstDay={1}
         theme={{
           backgroundColor: 'rgba(45, 55, 72, 0.8)',
           calendarBackground: 'transparent',
@@ -104,13 +87,27 @@ const Calendars = () => {
           },
         }}
         renderArrow={(direction) => {
+          let leftMonth = `2022-${nowMonth - 1}`;
+          let rightMonth = `2022-${nowMonth + 1}`;
+          if (nowMonth < 11) {
+            leftMonth = `2022-0${nowMonth - 1}`;
+          }
+          if (nowMonth < 9) {
+            rightMonth = `2022-0${nowMonth + 1}`;
+          }
+          if (nowMonth === 1) {
+            leftMonth = '2022-12';
+          }
+          if (nowMonth === 12) {
+            rightMonth = '2022-01';
+          }
           return (
             <View style={styles.container}>
               <TouchableOpacity>
                 {direction === 'left' ? (
-                  <Text style={styles.textMonthLeft}>{monthNames[nowMonth - 2]}</Text>
+                  <Text style={styles.textMonthLeft}>{moment(leftMonth).format('MMMM')}</Text>
                 ) : (
-                  <Text style={styles.textMonthRight}>{monthNames[nowMonth]}</Text>
+                  <Text style={styles.textMonthRight}>{moment(rightMonth).format('MMMM')}</Text>
                 )}
               </TouchableOpacity>
             </View>
@@ -118,6 +115,10 @@ const Calendars = () => {
         }}
         onMonthChange={onMonthChange}
         renderHeader={(date: any) => {
+          let month = `2022-${date.getMonth() + 1}`;
+          if (date.getMonth() < 9) {
+            month = `2022-0${date.getMonth() + 1}`;
+          }
           return (
             <View style={styles.container}>
               <View style={styles.hrBlack}>
@@ -126,7 +127,7 @@ const Calendars = () => {
               <View style={styles.hrPink}>
                 <></>
               </View>
-              <Text style={styles.textMonthActive}>{monthNames[date.getMonth()]}</Text>
+              <Text style={styles.textMonthActive}>{moment(month).format('MMMM')}</Text>
             </View>
           );
         }}
@@ -137,25 +138,48 @@ const Calendars = () => {
                 <View>
                   {Date.parse(e.date.dateString) < Date.parse(selectedEnd) &&
                     Date.parse(e.date.dateString) > Date.parse(selectedStart) ? (
-                    <View style={styles.midSelect}>
+                    <LinearGradient
+                      start={{ x: 0, y: 0.0 }}
+                      end={{ x: 1.3643, y: 0.0 }}
+                      style={styles.midSelect}
+                      colors={[' rgba(0, 0, 0, 0.2) ', 'rgba(0, 0, 0, 0) ']}>
                       <Text style={styles.textDay}>{e.date.day}</Text>
-                    </View>
+                    </LinearGradient>
                   ) : (
                     <View>
                       {selectedEnd !== '' && Date.parse(e.date.dateString) === Date.parse(selectedStart) ? (
-                        <View style={styles.startingStyles}></View>
+                        <LinearGradient
+                          start={{ x: 0, y: 0.0 }}
+                          end={{ x: 1.3643, y: 0.0 }}
+                          style={styles.startingStyles}
+                          colors={[' rgba(0, 0, 0, 0.2) ', 'rgba(0, 0, 0, 0) ']}>
+                          <></>
+                        </LinearGradient>
                       ) : null}
                       {selectedStart !== '' && Date.parse(e.date.dateString) === Date.parse(selectedEnd) ? (
-                        <View style={styles.EndingStyles}></View>
+                        <LinearGradient
+                          start={{ x: 0, y: 0.0 }}
+                          end={{ x: 1.3643, y: 0.0 }}
+                          style={styles.EndingStyles}
+                          colors={[' rgba(0, 0, 0, 0.2) ', 'rgba(0, 0, 0, 0) ']}>
+                          <></>
+                        </LinearGradient>
                       ) : null}
-                      <View
-                        style={
-                          e.date.dateString === selectedStart || e.date.dateString === selectedEnd
-                            ? styles.viewSelect
-                            : styles.viewDay
-                        }>
-                        <Text style={styles.textDay}>{e.date.day}</Text>
-                      </View>
+                      {e.date.dateString === selectedStart || e.date.dateString === selectedEnd ? (
+                        <LinearGradient
+                          start={{ x: 0.072, y: 0.0 }}
+                          end={{ x: 0.9717, y: 0.0 }}
+                          style={styles.viewSelect}
+                          colors={['#FF5789', '#FF9B9C']}>
+                          <View>
+                            <Text style={styles.textDay}>{e.date.day}</Text>
+                          </View>
+                        </LinearGradient>
+                      ) : (
+                        <View style={styles.viewDay}>
+                          <Text style={styles.textDay}>{e.date.day}</Text>
+                        </View>
+                      )}
                     </View>
                   )}
                 </View>
@@ -207,6 +231,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 10,
     marginBottom: 30,
+    width: 105,
   },
   hrBlack: {
     top: 35,
@@ -218,7 +243,7 @@ const styles = StyleSheet.create({
   },
   hrPink: {
     top: 35,
-    right: -30,
+    right: 10,
     position: 'absolute',
     height: 2,
     width: 122,
@@ -231,7 +256,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     color: '#828187',
-    marginLeft: 10,
+    marginLeft: 5,
   },
   textMonthRight: {
     fontFamily: 'Outfit',

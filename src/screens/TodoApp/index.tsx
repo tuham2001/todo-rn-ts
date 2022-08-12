@@ -3,7 +3,7 @@ import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, Alert, Pre
 import { useSelector } from 'react-redux';
 import Task from './components/Task';
 import { IconButton } from 'react-native-paper';
-import { useNavigation, DrawerActions } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core';
 import { dispatchStore } from '../../redux/store';
 import { deleteTask } from '../../redux/todo/todoThunk';
 import { logout } from '../../redux/user/userThunk';
@@ -49,9 +49,9 @@ const Home = (props: any) => {
       ) : null}
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={drawer ? styles.borderDrawer : styles.container}>
         <View style={styles.tasksWrapper}>
-          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+          {/* <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
             <Text>Menu</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={styles.viewDelete}>
             <TouchableOpacity style={styles.logout} onPress={() => onLogoutPressed()}>
               <Text>Đăng xuất</Text>

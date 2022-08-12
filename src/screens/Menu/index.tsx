@@ -4,28 +4,28 @@ import { DrawerActions, useNavigation } from '@react-navigation/core';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { Drawer } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
-import Home from '../../TodoApp';
+import Home from '../TodoApp';
 
-const DrawerContent = () => {
+const MenuScreen = () => {
   const navigation = useNavigation();
-  const handleRegister = () => {
-    navigation.navigate('MyStreaks');
+  const handleTabMenu = (screen: string) => {
+    navigation.navigate(screen);
   };
   return (
     <View style={styles.flex}>
       <DrawerContentScrollView>
         <View style={styles.container}>
           <View style={styles.flexRow}>
-            <Image source={require('../../../assets/ic_home.png')} style={styles.icHome} />
+            <Image source={require('../../assets/ic_home.png')} style={styles.icHome} />
             <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}>
-              <Image source={require('../../../assets/x.png')} style={styles.icX} />
+              <Image source={require('../../assets/x.png')} style={styles.icX} />
             </TouchableOpacity>
           </View>
           <View style={styles.row}>
             <View>
               <View style={styles.container}>
                 <View>
-                  <Image source={require('../../../assets/ava.png')} style={styles.icAva} />
+                  <Image source={require('../../assets/ava.png')} style={styles.icAva} />
                   <Text style={styles.name}>James B.</Text>
                 </View>
               </View>
@@ -35,45 +35,47 @@ const DrawerContent = () => {
                   end={{ x: 1.3643, y: 0.0 }}
                   style={styles.borderActive}
                   colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
-                  <View style={[styles.row, styles.bgActive]}>
-                    <Image source={require('../../../assets/ic_menu_1.png')} style={styles.icMenu} />
+                  <TouchableOpacity onPress={() => handleTabMenu('Home')} style={[styles.row, styles.bgActive]}>
+                    <Image source={require('../../assets/ic_menu_1.png')} style={styles.icMenu} />
                     <Text style={styles.textActive}>Home</Text>
-                  </View>
+                  </TouchableOpacity>
                 </LinearGradient>
-                <TouchableOpacity onPress={() => handleRegister()} style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_2.png')} style={styles.icMenu} />
+                <TouchableOpacity
+                  onPress={() => handleTabMenu('MyStreaksScreen')}
+                  style={[styles.row, styles.bgActive]}>
+                  <Image source={require('../../assets/ic_menu_2.png')} style={styles.icMenu} />
                   <Text style={styles.text}>My streaks</Text>
                 </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_2.png')} style={styles.icMenu} />
+                  <Image source={require('../../assets/ic_menu_2.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Reminder</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_3.png')} style={styles.icMenu} />
+                  <Image source={require('../../assets/ic_menu_3.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Invite your friends</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_4.png')} style={styles.icMenu} />
+                  <Image source={require('../../assets/ic_menu_4.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Send a testimonial</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_5.png')} style={styles.icMenu} />
+                  <Image source={require('../../assets/ic_menu_5.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Welcome video</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_6.png')} style={styles.icMenu} />
+                  <Image source={require('../../assets/ic_menu_6.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Rewards</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_7.png')} style={styles.icMenu} />
+                  <Image source={require('../../assets/ic_menu_7.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Help & Support</Text>
                 </View>
-                <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_8.png')} style={styles.icMenu} />
+                <TouchableOpacity onPress={() => handleTabMenu('SettingsScreen')} style={[styles.row, styles.bgActive]}>
+                  <Image source={require('../../assets/ic_menu_8.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Settings</Text>
-                </View>
+                </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../../assets/ic_menu_9.png')} style={styles.icMenu} />
+                  <Image source={require('../../assets/ic_menu_9.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Disclaimer</Text>
                 </View>
               </Drawer.Section>
@@ -192,4 +194,4 @@ const styles = StyleSheet.create({
     height: 65,
   },
 });
-export default DrawerContent;
+export default MenuScreen;

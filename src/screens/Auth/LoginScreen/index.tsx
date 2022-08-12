@@ -29,6 +29,8 @@ const LoginScreen = () => {
             login({
               email: values.email,
               password: values.password,
+              firstName: 'Phạm',
+              lastName: 'Tú',
               loggedIn: true,
             }),
           ),
