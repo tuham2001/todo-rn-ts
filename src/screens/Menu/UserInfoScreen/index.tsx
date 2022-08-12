@@ -6,7 +6,9 @@ import ImagePicker from 'react-native-image-crop-picker';
 import Header from '../components/Header';
 
 const UserInfoScreen = () => {
-  const [ava, setAva] = useState(require('../../../assets/ava.png'));
+  const [ava, setAva] = useState(
+    'file:///storage/emulated/0/Android/data/com.tsproject/files/Pictures/f7121f1c-5315-45fc-8f0f-70e9192726de.jpg',
+  );
   const user = useSelector((state: any) => state.user.userReducer.user);
   const handleChangeAva = () => {
     ImagePicker.openPicker({
@@ -15,7 +17,7 @@ const UserInfoScreen = () => {
       compressImageQuality: 0.7,
       cropping: false,
     }).then((image) => {
-      console.log(image);
+      setAva(image.path);
     });
   };
   return (
@@ -23,7 +25,7 @@ const UserInfoScreen = () => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Header header="User info" goBackScreen="SettingsScreen" />
         <View style={[styles.alignCenter, styles.flex]}>
-          {ava && <Image source={ava} style={styles.icAva} />}
+          <Image source={{ uri: ava }} style={styles.icAva} />
           <TouchableOpacity
             onPress={() => {
               handleChangeAva();
@@ -91,6 +93,7 @@ const styles = StyleSheet.create({
   icAva: {
     height: 100,
     width: 100,
+    borderRadius: 170,
   },
   icAvaChange: {
     height: 40,
