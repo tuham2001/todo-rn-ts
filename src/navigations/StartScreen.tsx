@@ -13,6 +13,7 @@ import MyStreaksScreen from '../screens/Menu/MyStreaksScreen';
 import SettingsScreen from '../screens/Menu/SettingsScreen';
 import MenuScreen from '../screens/Menu';
 import UserInfoScreen from '../screens/Menu/UserInfoScreen';
+import TutorialScreen from '../screens/Menu/TutorialScreen';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -54,6 +55,13 @@ const HomeDrawer = () => {
         }}
         name="UserInfoScreen"
         component={UserInfoScreen}
+      />
+      <Drawer.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="TutorialScreen"
+        component={TutorialScreen}
       />
     </Drawer.Navigator>
   );

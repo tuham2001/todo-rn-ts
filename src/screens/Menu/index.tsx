@@ -46,14 +46,10 @@ const MenuScreen = () => {
                   <Image source={require('../../assets/ic_menu_2.png')} style={styles.icMenu} />
                   <Text style={styles.text}>My streaks</Text>
                 </TouchableOpacity>
-                <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_2.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Reminder</Text>
-                </View>
-                <View style={[styles.row, styles.bgActive]}>
+                <TouchableOpacity onPress={() => handleTabMenu('TutorialScreen')} style={[styles.row, styles.bgActive]}>
                   <Image source={require('../../assets/ic_menu_3.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Invite your friends</Text>
-                </View>
+                  <Text style={styles.text}>Tutorial</Text>
+                </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
                   <Image source={require('../../assets/ic_menu_4.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Send a testimonial</Text>
