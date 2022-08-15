@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity, Alert, Platform, PermissionsAndroid } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity, Alert, Platform, PermissionsAndroid, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import RNFetchBlob from 'rn-fetch-blob';
 import { WebView } from 'react-native-webview';
@@ -75,32 +75,40 @@ const TutorialScreen = () => {
     // To get the file extension
     return /[.]/.exec(fileUrl) ? /[^.]+$/.exec(fileUrl) : undefined;
   };
-  const listWebView = ['https://www.youtube.com/embed/4tYuIU7pLmI', 'https://www.youtube.com/embed/4CCGI83vOVo'];
+  const listWebView = [
+    'https://www.youtube.com/embed/4tYuIU7pLmI',
+    'https://www.youtube.com/embed/4CCGI83vOVo',
+    'https://www.youtube.com/watch?v=cDZ7B2zie2s',
+  ];
   return (
     <View style={[styles.bgColor, styles.flex1]}>
-      <View style={[styles.flexRow, styles.header]}>
-        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-          <Image source={require('../../../assets/LeftBtn.png')} style={styles.icLeft} />
-        </TouchableOpacity>
-        <Text style={styles.textHeader}>TUTORIAL</Text>
-      </View>
-      {listWebView.map((item: any, index: number) => {
-        return (
-          <View key={index} style={[styles.webView, styles.container]}>
-            <WebView style={styles.itemWebView} javaScriptEnabled={true} source={{ uri: item }} />
-          </View>
-        );
-      })}
-      <LinearGradient
-        start={{ x: -0.1473, y: 0.0 }}
-        end={{ x: 0.533, y: 0.0 }}
-        style={[styles.items, styles.container]}
-        colors={['rgba(0, 0, 0, 0.02)', ' rgba(255, 255, 255, 0.33)']}>
-        <TouchableOpacity onPress={checkPermission} style={[styles.flexRow, styles.flex]}>
-          <Text style={styles.textWhite}>Download PDF instruction</Text>
-          <Image source={require('../../../assets/download.png')} style={styles.icDownload} />
-        </TouchableOpacity>
-      </LinearGradient>
+      <ScrollView>
+        <View style={[styles.flexRow, styles.header]}>
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <Image source={require('../../../assets/LeftBtn.png')} style={styles.icLeft} />
+          </TouchableOpacity>
+          <Text style={styles.textHeader}>TUTORIAL</Text>
+        </View>
+        {listWebView.map((item: any, index: number) => {
+          const SplitedWebView = item.split('watch?v=');
+          const Embed = SplitedWebView.join('embed/');
+          return (
+            <View key={index} style={[styles.webView, styles.container]}>
+              <WebView style={styles.itemWebView} javaScriptEnabled={true} source={{ uri: Embed }} />
+            </View>
+          );
+        })}
+        <LinearGradient
+          start={{ x: -0.1473, y: 0.0 }}
+          end={{ x: 0.533, y: 0.0 }}
+          style={[styles.items, styles.container]}
+          colors={['rgba(0, 0, 0, 0.02)', ' rgba(255, 255, 255, 0.33)']}>
+          <TouchableOpacity onPress={checkPermission} style={[styles.flexRow, styles.flex]}>
+            <Text style={styles.textWhite}>Download PDF instruction</Text>
+            <Image source={require('../../../assets/download.png')} style={styles.icDownload} />
+          </TouchableOpacity>
+        </LinearGradient>
+      </ScrollView>
     </View>
   );
 };
