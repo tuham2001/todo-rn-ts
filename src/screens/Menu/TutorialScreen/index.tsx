@@ -24,6 +24,7 @@ const TutorialScreen = () => {
         });
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           // Start downloading
+          Alert.alert('File is being downloaded');
           downloadFile();
           console.log('Storage Permission Granted.');
         } else {
@@ -74,6 +75,7 @@ const TutorialScreen = () => {
     // To get the file extension
     return /[.]/.exec(fileUrl) ? /[^.]+$/.exec(fileUrl) : undefined;
   };
+  const listWebView = ['https://www.youtube.com/embed/4tYuIU7pLmI', 'https://www.youtube.com/embed/4CCGI83vOVo'];
   return (
     <View style={[styles.bgColor, styles.flex1]}>
       <View style={[styles.flexRow, styles.header]}>
@@ -82,20 +84,13 @@ const TutorialScreen = () => {
         </TouchableOpacity>
         <Text style={styles.textHeader}>TUTORIAL</Text>
       </View>
-      <View style={[styles.webView, styles.container]}>
-        <WebView
-          style={styles.itemWebView}
-          javaScriptEnabled={true}
-          source={{ uri: 'https://www.youtube.com/embed/4tYuIU7pLmI' }}
-        />
-      </View>
-      <View style={[styles.webView, styles.container]}>
-        <WebView
-          style={styles.itemWebView}
-          javaScriptEnabled={true}
-          source={{ uri: 'https://www.youtube.com/embed/4CCGI83vOVo' }}
-        />
-      </View>
+      {listWebView.map((item: any, index: number) => {
+        return (
+          <View key={index} style={[styles.webView, styles.container]}>
+            <WebView style={styles.itemWebView} javaScriptEnabled={true} source={{ uri: item }} />
+          </View>
+        );
+      })}
       <LinearGradient
         start={{ x: -0.1473, y: 0.0 }}
         end={{ x: 0.533, y: 0.0 }}
