@@ -1,5 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity, Alert, Platform, PermissionsAndroid, ScrollView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  Alert,
+  Platform,
+  PermissionsAndroid,
+  ScrollView,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import RNFetchBlob from 'rn-fetch-blob';
 import { WebView } from 'react-native-webview';
@@ -7,8 +17,12 @@ import { DrawerActions, useNavigation } from '@react-navigation/core';
 
 const TutorialScreen = () => {
   const navigation = useNavigation();
-  const fileUrl = 'https://www.techup.co.in/wp-content/uploads/2020/01/techup_logo_72-scaled.jpg';
-
+  const fileUrl = 'https://download.novapdf.com/download/samples/pdf-example-encryption.pdf ';
+  const listWebView = [
+    'https://www.youtube.com/embed/4tYuIU7pLmI',
+    'https://www.youtube.com/embed/4CCGI83vOVo',
+    'https://www.youtube.com/watch?v=cDZ7B2zie2s',
+  ];
   const checkPermission = async () => {
     // Function to check the platform
     // If Platform is Android then check for permissions.
@@ -20,11 +34,11 @@ const TutorialScreen = () => {
         const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE, {
           title: 'Storage Permission Required',
           message: 'Application needs access to your storage to download File',
-          buttonPositive: '',
+          // buttonPositive: '',
         });
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           // Start downloading
-          Alert.alert('File is being downloaded');
+          // Alert.alert('File is being downloaded');
           downloadFile();
           console.log('Storage Permission Granted.');
         } else {
@@ -45,7 +59,6 @@ const TutorialScreen = () => {
     let FILE_URL = fileUrl;
     // Function to get extention of the file url
     let file_ext = getFileExtention(FILE_URL);
-
     file_ext = '.' + file_ext[0];
 
     // config: To get response by passing the downloading related options
@@ -60,6 +73,11 @@ const TutorialScreen = () => {
         notification: true,
         // useDownloadManager works with Android only
         useDownloadManager: true,
+        title: 'awesome.apk',
+        mime: 'application/pdf',
+        mediaScannable: true,
+        overwrite: true,
+        fileCache: true,
       },
     };
     config(options)
@@ -68,6 +86,9 @@ const TutorialScreen = () => {
         // Alert after successful downloading
         console.log('res -> ', JSON.stringify(res));
         Alert.alert('File Downloaded Successfully.');
+      })
+      .catch((err) => {
+        console.log('err', err);
       });
   };
 
@@ -75,11 +96,6 @@ const TutorialScreen = () => {
     // To get the file extension
     return /[.]/.exec(fileUrl) ? /[^.]+$/.exec(fileUrl) : undefined;
   };
-  const listWebView = [
-    'https://www.youtube.com/embed/4tYuIU7pLmI',
-    'https://www.youtube.com/embed/4CCGI83vOVo',
-    'https://www.youtube.com/watch?v=cDZ7B2zie2s',
-  ];
   return (
     <View style={[styles.bgColor, styles.flex1]}>
       <ScrollView>
@@ -103,7 +119,7 @@ const TutorialScreen = () => {
           end={{ x: 0.533, y: 0.0 }}
           style={[styles.items, styles.container]}
           colors={['rgba(0, 0, 0, 0.02)', ' rgba(255, 255, 255, 0.33)']}>
-          <TouchableOpacity onPress={checkPermission} style={[styles.flexRow, styles.flex]}>
+          <TouchableOpacity onPress={() => checkPermission()} style={[styles.flexRow, styles.flex]}>
             <Text style={styles.textWhite}>Download PDF instruction</Text>
             <Image source={require('../../../assets/download.png')} style={styles.icDownload} />
           </TouchableOpacity>
