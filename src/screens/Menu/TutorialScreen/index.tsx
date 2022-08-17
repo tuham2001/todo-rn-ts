@@ -23,6 +23,11 @@ const TutorialScreen = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [current, setCurrent] = useState('2020-10-10');
+  const [selectedStart, setSelectedStart] = useState('');
+  const [nowMonth, setNowMonth] = useState(10);
+  const [nowYear, setNowYear] = useState(2020);
+  const [changeMonth, setChangeMonth] = useState(false);
+  const [changeYear, setChangeYear] = useState(false);
   const fileUrl = 'https://download.novapdf.com/download/samples/pdf-example-encryption.pdf ';
   const listWebView = [
     'https://www.youtube.com/embed/4tYuIU7pLmI',
@@ -141,12 +146,6 @@ const TutorialScreen = () => {
     // To get the file extension
     return /[.]/.exec(fileUrl) ? /[^.]+$/.exec(fileUrl) : undefined;
   };
-
-  const [selectedStart, setSelectedStart] = useState('');
-  const [nowMonth, setNowMonth] = useState(10);
-  const [nowYear, setNowYear] = useState(2020);
-  const [changeMonth, setChangeMonth] = useState(false);
-  const [changeYear, setChangeYear] = useState(false);
   const marked = useMemo(() => {
     return {
       [selectedStart]: {
@@ -157,6 +156,8 @@ const TutorialScreen = () => {
     };
   }, [selectedStart]);
   const onDayPress = useCallback((day: any) => {
+    setNowMonth(day.month);
+    setCurrent(day.dateString);
     setSelectedStart(day.dateString);
   }, []);
   const onMonthChange = (date: any) => {
@@ -169,6 +170,7 @@ const TutorialScreen = () => {
     } else {
       setCurrent(`${nowYear}-${item + 1}-10`);
     }
+    setChangeMonth(!changeMonth);
   };
   const handleChangeYear = (item: any) => {
     setNowYear(item);
@@ -177,6 +179,7 @@ const TutorialScreen = () => {
     } else {
       setCurrent(`${item}-${nowMonth}-10`);
     }
+    setChangeYear(!changeYear);
   };
   return (
     <View style={[styles.bgColor, styles.flex1, modalVisible ? styles.opacity : null]}>
@@ -233,45 +236,70 @@ const TutorialScreen = () => {
                             <Text style={styles.textDay}>{month}</Text>
                             <Image source={require('../../../assets/Caretdown.png')} style={styles.icCaretdown} />
                           </View>
-                          {changeMonth ? (
-                            <View style={styles.listMonth}>
-                              <ScrollView>
-                                {listMonth.map((item, index) => {
-                                  return (
-                                    <TouchableOpacity
-                                      onPress={() => handleChangeMonth(index)}
-                                      style={styles.flex1}
-                                      key={index}>
-                                      <Text style={[styles.textDay, styles.flex1]}>{item}</Text>
-                                    </TouchableOpacity>
-                                  );
-                                })}
-                              </ScrollView>
+                          <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={changeMonth}
+                            onRequestClose={() => {
+                              Alert.alert('Modal has been closed.');
+                              setChangeMonth(!changeMonth);
+                            }}>
+                            <View style={styles.centeredView}>
+                              <View style={styles.modalView}>
+                                <View style={styles.listMonth}>
+                                  <ScrollView>
+                                    {listMonth.map((item, index) => {
+                                      return (
+                                        <TouchableOpacity
+                                          onPress={() => handleChangeMonth(index)}
+                                          style={styles.flex1}
+                                          key={index}>
+                                          <Text style={[styles.textDay, styles.flex1]}>{item}</Text>
+                                        </TouchableOpacity>
+                                      );
+                                    })}
+                                  </ScrollView>
+                                </View>
+                              </View>
                             </View>
-                          ) : null}
+                          </Modal>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => setChangeYear(!changeYear)} style={styles.flex1}>
                           <View style={styles.headerYearCalender}>
                             <Text style={styles.textDay}>{year}</Text>
                             <Image source={require('../../../assets/Caretdown.png')} style={styles.icCaretdown} />
                           </View>
-                          {changeYear ? (
-                            <View style={styles.listMonth}>
-                              <ScrollView>
-                                {listYear.map((item, index) => {
-                                  return (
-                                    <TouchableOpacity
-                                      onPress={() => handleChangeYear(item)}
-                                      style={styles.flex1}
-                                      key={index}>
-                                      <Text style={[styles.textDay, styles.flex1]}>{item}</Text>
-                                    </TouchableOpacity>
-                                  );
-                                })}
-                              </ScrollView>
+                          <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={changeYear}
+                            onRequestClose={() => {
+                              Alert.alert('Modal has been closed.');
+                              setChangeYear(!changeYear);
+                            }}>
+                            <View style={styles.centeredView}>
+                              <View style={styles.modalView}>
+                                <View style={styles.listMonth}>
+                                  <ScrollView>
+                                    {listYear.map((item, index) => {
+                                      return (
+                                        <TouchableOpacity
+                                          onPress={() => handleChangeYear(item)}
+                                          style={styles.flex1}
+                                          key={index}>
+                                          <Text style={[styles.textDay, styles.flex1]}>{item}</Text>
+                                        </TouchableOpacity>
+                                      );
+                                    })}
+                                  </ScrollView>
+                                </View>
+                              </View>
                             </View>
-                          ) : null}
+                          </Modal>
                         </TouchableOpacity>
+                      </View>
+                      <View style={styles.hrWhite}>
+                        <></>
                       </View>
                     </>
                   );
@@ -315,8 +343,7 @@ const TutorialScreen = () => {
                 hideArrows={true}
               />
               <Pressable style={[styles.flexRow, styles.mt16]} onPress={() => setModalVisible(!modalVisible)}>
-                <View
-                  style={styles.btnCancel}>
+                <View style={styles.btnCancel}>
                   <TouchableOpacity
                     onPress={() => setModalVisible(!modalVisible)}
                     style={[styles.flexRow, styles.flex]}>
@@ -373,15 +400,23 @@ const TutorialScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  hrWhite: {
+    marginTop: 35,
+    position: 'absolute',
+    height: 2,
+    width: '100%',
+    backgroundColor: '#FFF',
+  },
   opacity: {
     opacity: 0.3,
   },
   listMonth: {
-    // backgroundColor: '#FFF',
     width: '100%',
     maxHeight: 70,
     position: 'relative',
-    zIndex: 9,
+    zIndex: 90,
+    minWidth: 100,
+    alignItems: 'center',
   },
   headerMonthCalender: {
     flexDirection: 'row',
@@ -389,6 +424,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#9BA1AD',
     marginRight: 16,
+    marginBottom: 10,
   },
   headerYearCalender: {
     flexDirection: 'row',
@@ -415,6 +451,8 @@ const styles = StyleSheet.create({
   },
   itemDay: {
     height: 30,
+    position: 'relative',
+    zIndex: 1,
   },
   viewSelect: {
     display: 'flex',
@@ -465,7 +503,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    // marginTop: 22,
   },
   modalView: {
     margin: 20,
