@@ -23,11 +23,12 @@ const TutorialScreen = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [current, setCurrent] = useState('2020-10-10');
-  const [selectedStart, setSelectedStart] = useState('');
   const [nowMonth, setNowMonth] = useState(10);
   const [nowYear, setNowYear] = useState(2020);
   const [changeMonth, setChangeMonth] = useState(false);
   const [changeYear, setChangeYear] = useState(false);
+  const [selectedStart, setSelectedStart] = useState('');
+  const [saveSelect, setSaveSelect] = useState('');
   const fileUrl = 'https://download.novapdf.com/download/samples/pdf-example-encryption.pdf ';
   const listWebView = [
     'https://www.youtube.com/embed/4tYuIU7pLmI',
@@ -181,6 +182,14 @@ const TutorialScreen = () => {
     }
     setChangeYear(!changeYear);
   };
+  const handleSave = () => {
+    setModalVisible(!modalVisible);
+    setSaveSelect(selectedStart);
+  };
+  const handleCancel = () => {
+    setSelectedStart(saveSelect);
+    setModalVisible(!modalVisible);
+  };
   return (
     <View style={[styles.bgColor, styles.flex1, modalVisible ? styles.opacity : null]}>
       <ScrollView>
@@ -191,7 +200,7 @@ const TutorialScreen = () => {
           <Text style={styles.textHeader}>TUTORIAL</Text>
         </View>
         <Modal
-          animationType="slide"
+          animationType="none"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -237,7 +246,7 @@ const TutorialScreen = () => {
                             <Image source={require('../../../assets/Caretdown.png')} style={styles.icCaretdown} />
                           </View>
                           <Modal
-                            animationType="slide"
+                            animationType="none"
                             transparent={true}
                             visible={changeMonth}
                             onRequestClose={() => {
@@ -270,7 +279,7 @@ const TutorialScreen = () => {
                             <Image source={require('../../../assets/Caretdown.png')} style={styles.icCaretdown} />
                           </View>
                           <Modal
-                            animationType="slide"
+                            animationType="none"
                             transparent={true}
                             visible={changeYear}
                             onRequestClose={() => {
@@ -321,13 +330,21 @@ const TutorialScreen = () => {
                             </LinearGradient>
                           ) : (
                             <View style={styles.viewDay}>
-                              <Text style={styles.textDay}>{e.date.day}</Text>
+                              {e.date.month === 12 && nowMonth === 1 ? (
+                                <Text style={styles.prevTextDay}>{e.date.day}</Text>
+                              ) : (
+                                <Text style={styles.textDay}>{e.date.day}</Text>
+                              )}
                             </View>
                           )}
                         </View>
                       ) : (
                         <View style={styles.viewDay}>
-                          <Text style={styles.prevTextDay}>{e.date.day}</Text>
+                          {e.date.month === 1 && nowMonth === 12 ? (
+                            <Text style={styles.textDay}>{e.date.day}</Text>
+                          ) : (
+                            <Text style={styles.prevTextDay}>{e.date.day}</Text>
+                          )}
                         </View>
                       )}
                     </TouchableOpacity>
@@ -344,9 +361,7 @@ const TutorialScreen = () => {
               />
               <Pressable style={[styles.flexRow, styles.mt16]} onPress={() => setModalVisible(!modalVisible)}>
                 <View style={styles.btnCancel}>
-                  <TouchableOpacity
-                    onPress={() => setModalVisible(!modalVisible)}
-                    style={[styles.flexRow, styles.flex]}>
+                  <TouchableOpacity onPress={handleCancel} style={[styles.flexRow, styles.flex]}>
                     <Text style={styles.textCancel}>Cancel</Text>
                     <Image source={require('../../../assets/Cancel.png')} style={styles.icDownload} />
                   </TouchableOpacity>
@@ -356,9 +371,7 @@ const TutorialScreen = () => {
                   end={{ x: 0.533, y: 0.0 }}
                   style={styles.items}
                   colors={['rgba(0, 0, 0, 0.02)', ' rgba(255, 255, 255, 0.33)']}>
-                  <TouchableOpacity
-                    onPress={() => setModalVisible(!modalVisible)}
-                    style={[styles.flexRow, styles.flex]}>
+                  <TouchableOpacity onPress={handleSave} style={[styles.flexRow, styles.flex]}>
                     <Text style={styles.textWhite}>Save</Text>
                     <Image source={require('../../../assets/FloppyDisk.png')} style={styles.icDownload} />
                   </TouchableOpacity>
@@ -507,9 +520,9 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
+    padding: 16,
     backgroundColor: '#E7ECF4',
     borderRadius: 20,
-    padding: 16,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
