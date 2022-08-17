@@ -9,9 +9,9 @@ import {
   Platform,
   PermissionsAndroid,
   ScrollView,
-  Modal,
   Pressable,
 } from 'react-native';
+import Modal from 'react-native-modal';
 import LinearGradient from 'react-native-linear-gradient';
 import RNFetchBlob from 'rn-fetch-blob';
 import { WebView } from 'react-native-webview';
@@ -191,7 +191,7 @@ const TutorialScreen = () => {
     setModalVisible(!modalVisible);
   };
   return (
-    <View style={[styles.bgColor, styles.flex1, modalVisible ? styles.opacity : null]}>
+    <View style={[styles.bgColor, styles.flex1]}>
       <ScrollView>
         <View style={[styles.flexRow, styles.header]}>
           <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
@@ -200,13 +200,11 @@ const TutorialScreen = () => {
           <Text style={styles.textHeader}>TUTORIAL</Text>
         </View>
         <Modal
-          animationType="none"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}>
+          isVisible={modalVisible}
+          animationIn="pulse"
+          animationOut="pulse"
+          onBackdropPress={() => setModalVisible(false)}
+          onBackButtonPress={() => setModalVisible(false)}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Calendar
@@ -246,13 +244,9 @@ const TutorialScreen = () => {
                             <Image source={require('../../../assets/Caretdown.png')} style={styles.icCaretdown} />
                           </View>
                           <Modal
-                            animationType="none"
-                            transparent={true}
-                            visible={changeMonth}
-                            onRequestClose={() => {
-                              Alert.alert('Modal has been closed.');
-                              setChangeMonth(!changeMonth);
-                            }}>
+                            isVisible={changeMonth}
+                            onBackdropPress={() => setChangeMonth(false)}
+                            onBackButtonPress={() => setChangeMonth(false)}>
                             <View style={styles.centeredView}>
                               <View style={styles.modalView}>
                                 <View style={styles.listMonth}>
@@ -279,13 +273,9 @@ const TutorialScreen = () => {
                             <Image source={require('../../../assets/Caretdown.png')} style={styles.icCaretdown} />
                           </View>
                           <Modal
-                            animationType="none"
-                            transparent={true}
-                            visible={changeYear}
-                            onRequestClose={() => {
-                              Alert.alert('Modal has been closed.');
-                              setChangeYear(!changeYear);
-                            }}>
+                            isVisible={changeYear}
+                            onBackdropPress={() => setChangeYear(false)}
+                            onBackButtonPress={() => setChangeYear(false)}>
                             <View style={styles.centeredView}>
                               <View style={styles.modalView}>
                                 <View style={styles.listMonth}>
@@ -389,11 +379,7 @@ const TutorialScreen = () => {
           const Embed = SplitedWebView.join('embed/');
           return (
             <View key={index} style={[styles.webView, styles.container]}>
-              <WebView
-                style={[styles.itemWebView, modalVisible ? styles.opacity : null]}
-                javaScriptEnabled={true}
-                source={{ uri: Embed }}
-              />
+              <WebView style={styles.itemWebView} javaScriptEnabled={true} source={{ uri: Embed }} />
             </View>
           );
         })}
@@ -419,9 +405,6 @@ const styles = StyleSheet.create({
     height: 2,
     width: '100%',
     backgroundColor: '#FFF',
-  },
-  opacity: {
-    opacity: 0.3,
   },
   listMonth: {
     width: '100%',
