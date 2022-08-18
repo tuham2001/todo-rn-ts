@@ -13,11 +13,7 @@ import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import store, { persistor } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import TodoApp from './src/screens/TodoApp';
-import Navigator from './src/navigations/StartScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import DetailTask from './src/screens/TodoApp/components/DetailTask';
+import Navigator from '@/navigations/StartScreen';
 
 const App = () => {
   return (
@@ -39,7 +35,6 @@ const styles = StyleSheet.create({
   },
 });
 export default App;
-
 
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';

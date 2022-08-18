@@ -5,8 +5,8 @@ import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/core';
 import Header from '../components/Header';
 import { IconButton } from 'react-native-paper';
-import { dispatchStore } from '../../../redux/store';
-import { register } from '../../../redux/user/userRedux';
+import { dispatchStore } from '@/redux/store';
+import { register } from '@/redux/user/userRedux';
 import LinearGradient from 'react-native-linear-gradient';
 
 const RegisterScreen = () => {
@@ -53,12 +53,7 @@ const RegisterScreen = () => {
         <View style={styles.container}>
           <Text style={styles.textLogin}>Register</Text>
           <View style={styles.searchSection}>
-            <IconButton
-              icon={require('../../../assets/ic_invite.png')}
-              style={styles.icMail}
-              size={24}
-              color="#A4BCC1"
-            />
+            <IconButton icon={require('@/assets/ic_invite.png')} style={styles.icMail} size={24} color="#A4BCC1" />
             <TextInput
               value={values.firstname}
               onChangeText={handleChange('firstname')}
@@ -70,12 +65,7 @@ const RegisterScreen = () => {
           </View>
           {errors.firstname && touched.firstname ? <Text style={styles.error}>{errors.firstname}</Text> : null}
           <View style={styles.searchSection}>
-            <IconButton
-              icon={require('../../../assets/ic_invite.png')}
-              style={styles.icMail}
-              size={24}
-              color="#A4BCC1"
-            />
+            <IconButton icon={require('@/assets/ic_invite.png')} style={styles.icMail} size={24} color="#A4BCC1" />
             <TextInput
               value={values.lastname}
               onChangeText={handleChange('lastname')}
@@ -87,7 +77,7 @@ const RegisterScreen = () => {
           </View>
           {errors.lastname && touched.lastname ? <Text style={styles.error}>{errors.lastname}</Text> : null}
           <View style={styles.searchSection}>
-            <IconButton icon={require('../../../assets/ic_mail.png')} style={styles.icMail} size={24} color="#A4BCC1" />
+            <IconButton icon={require('@/assets/ic_mail.png')} style={styles.icMail} size={24} color="#A4BCC1" />
             <TextInput
               value={values.email}
               onChangeText={handleChange('email')}
@@ -99,7 +89,7 @@ const RegisterScreen = () => {
           </View>
           {errors.email && touched.email ? <Text style={styles.error}>{errors.email}</Text> : null}
           <View style={styles.searchSection}>
-            <IconButton icon={require('../../../assets/ic_pass.png')} style={styles.icMail} size={24} color="#A4BCC1" />
+            <IconButton icon={require('@/assets/ic_pass.png')} style={styles.icMail} size={24} color="#A4BCC1" />
             <TextInput
               value={values.password}
               onChangeText={handleChange('password')}
@@ -116,7 +106,7 @@ const RegisterScreen = () => {
             </TouchableOpacity>
             {isChecked ? (
               <IconButton
-                icon={require('../../../assets/check_white.png')}
+                icon={require('@/assets/check_white.png')}
                 size={18}
                 color={'#FF5889'}
                 style={styles.iconCheck}

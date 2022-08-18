@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { addTask } from '../../../redux/todo/todoThunk';
-import { getUuid } from '../../../utils/common/getUuid';
-import { dispatchStore } from '../../../redux/store';
+import { addTask } from '@/redux/todo/todoThunk';
+import { getUuid } from '@/utils/common/getUuid';
+import { dispatchStore } from '@/redux/store';
 import { useNavigation } from '@react-navigation/core';
 
 const CreateTask = () => {

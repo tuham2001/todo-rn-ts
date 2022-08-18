@@ -195,7 +195,7 @@ const TutorialScreen = () => {
       <ScrollView>
         <View style={[styles.flexRow, styles.header]}>
           <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-            <Image source={require('../../../assets/LeftBtn.png')} style={styles.icLeft} />
+            <Image source={require('@/assets/LeftBtn.png')} style={styles.icLeft} />
           </TouchableOpacity>
           <Text style={styles.textHeader}>TUTORIAL</Text>
         </View>
@@ -241,10 +241,12 @@ const TutorialScreen = () => {
                         <TouchableOpacity onPress={() => setChangeMonth(!changeMonth)} style={styles.flex1}>
                           <View style={styles.headerMonthCalender}>
                             <Text style={styles.textDay}>{month}</Text>
-                            <Image source={require('../../../assets/Caretdown.png')} style={styles.icCaretdown} />
+                            <Image source={require('@/assets/Caretdown.png')} style={styles.icCaretdown} />
                           </View>
                           <Modal
                             isVisible={changeMonth}
+                            animationIn="pulse"
+                            animationOut="pulse"
                             onBackdropPress={() => setChangeMonth(false)}
                             onBackButtonPress={() => setChangeMonth(false)}>
                             <View style={styles.centeredView}>
@@ -270,10 +272,12 @@ const TutorialScreen = () => {
                         <TouchableOpacity onPress={() => setChangeYear(!changeYear)} style={styles.flex1}>
                           <View style={styles.headerYearCalender}>
                             <Text style={styles.textDay}>{year}</Text>
-                            <Image source={require('../../../assets/Caretdown.png')} style={styles.icCaretdown} />
+                            <Image source={require('@/assets/Caretdown.png')} style={styles.icCaretdown} />
                           </View>
                           <Modal
                             isVisible={changeYear}
+                            animationIn="pulse"
+                            animationOut="pulse"
                             onBackdropPress={() => setChangeYear(false)}
                             onBackButtonPress={() => setChangeYear(false)}>
                             <View style={styles.centeredView}>
@@ -353,7 +357,7 @@ const TutorialScreen = () => {
                 <View style={styles.btnCancel}>
                   <TouchableOpacity onPress={handleCancel} style={[styles.flexRow, styles.flex]}>
                     <Text style={styles.textCancel}>Cancel</Text>
-                    <Image source={require('../../../assets/Cancel.png')} style={styles.icDownload} />
+                    <Image source={require('@/assets/Cancel.png')} style={styles.icDownload} />
                   </TouchableOpacity>
                 </View>
                 <LinearGradient
@@ -363,7 +367,7 @@ const TutorialScreen = () => {
                   colors={['rgba(0, 0, 0, 0.02)', ' rgba(255, 255, 255, 0.33)']}>
                   <TouchableOpacity onPress={handleSave} style={[styles.flexRow, styles.flex]}>
                     <Text style={styles.textWhite}>Save</Text>
-                    <Image source={require('../../../assets/FloppyDisk.png')} style={styles.icDownload} />
+                    <Image source={require('@/assets/FloppyDisk.png')} style={styles.icDownload} />
                   </TouchableOpacity>
                 </LinearGradient>
               </Pressable>
@@ -390,7 +394,7 @@ const TutorialScreen = () => {
           colors={['rgba(0, 0, 0, 0.02)', ' rgba(255, 255, 255, 0.33)']}>
           <TouchableOpacity onPress={() => checkPermission()} style={[styles.flexRow, styles.flex]}>
             <Text style={styles.textWhite}>Download PDF instruction</Text>
-            <Image source={require('../../../assets/download.png')} style={styles.icDownload} />
+            <Image source={require('@/assets/download.png')} style={styles.icDownload} />
           </TouchableOpacity>
         </LinearGradient>
       </ScrollView>

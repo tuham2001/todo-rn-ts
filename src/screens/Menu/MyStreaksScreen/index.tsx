@@ -14,7 +14,7 @@ const MyStreaksScreen = () => {
         style={styles.streak}
         colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
         <View style={styles.flexRow}>
-          <Image source={require('../../../assets/ic_myStreaks.png')} style={styles.icHeader} />
+          <Image source={require('@/assets/ic_myStreaks.png')} style={styles.icHeader} />
           <View>
             <Text style={[styles.textWhite, styles.mt14]}>Current streak: 1</Text>
             <Text style={[styles.textLongest, styles.mt2]}>Longest streak: 2</Text>

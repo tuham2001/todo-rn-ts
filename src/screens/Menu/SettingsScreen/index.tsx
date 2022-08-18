@@ -17,7 +17,7 @@ const SettingsScreen = () => {
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <TouchableOpacity onPress={() => navigation.navigate('UserInfoScreen')} style={styles.flexRow}>
             <Text style={[styles.textWhite, styles.mt14]}>User Info</Text>
-            <Image source={require('../../../assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
+            <Image source={require('@/assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
           </TouchableOpacity>
         </LinearGradient>
         <LinearGradient
@@ -27,7 +27,7 @@ const SettingsScreen = () => {
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <View style={styles.flexRow}>
             <Text style={[styles.textWhite, styles.mt14]}>My Subscriptions</Text>
-            <Image source={require('../../../assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
+            <Image source={require('@/assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
           </View>
         </LinearGradient>
         <LinearGradient
@@ -37,7 +37,7 @@ const SettingsScreen = () => {
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <View style={styles.flexRow}>
             <Text style={[styles.textWhite, styles.mt14]}>Profile Tags</Text>
-            <Image source={require('../../../assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
+            <Image source={require('@/assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
           </View>
         </LinearGradient>
       </ScrollView>

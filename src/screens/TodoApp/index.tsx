@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import Task from './components/Task';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/core';
-import { dispatchStore } from '../../redux/store';
-import { deleteTask } from '../../redux/todo/todoThunk';
-import { logout } from '../../redux/user/userThunk';
+import { dispatchStore } from '@/redux/store';
+import { deleteTask } from '@/redux/todo/todoThunk';
+import { logout } from '@/redux/user/userThunk';
 import LinearGradient from 'react-native-linear-gradient';
 
 const Home = (props: any) => {
@@ -95,7 +95,7 @@ const Home = (props: any) => {
         </View>
       </Modal>
       <IconButton
-        icon={require('../../assets/ic_plus.png')}
+        icon={require('@/assets/ic_plus.png')}
         style={styles.floatinBtn}
         size={40}
         color="white"

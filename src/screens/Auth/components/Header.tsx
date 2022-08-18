@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 const Header = () => {
   return (
     <View style={styles.flexRow}>
-      <Image source={require('../../../assets/icHeader.png')} style={styles.icHeader} />
+      <Image source={require('@/assets/icHeader.png')} style={styles.icHeader} />
       <View style={styles.flexColumn}>
         <Text style={styles.upNow}>UpNow</Text>
         <Text style={styles.digital}>Digital Hypnotherapy</Text>

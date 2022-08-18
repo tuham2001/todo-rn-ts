@@ -3,17 +3,17 @@ import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '../screens/TodoApp';
-import DetailTask from '../screens/TodoApp/components/DetailTask';
-import CreateTask from '../screens/TodoApp/components/CreateTask';
-import LoginScreen from '../screens/Auth/LoginScreen';
-import RegisterScreen from '../screens/Auth/RegisterScreen';
+import Home from '@/screens/TodoApp';
+import DetailTask from '@/screens/TodoApp/components/DetailTask';
+import CreateTask from '@/screens/TodoApp/components/CreateTask';
+import LoginScreen from '@/screens/Auth/LoginScreen';
+import RegisterScreen from '@/screens/Auth/RegisterScreen';
 
-import MyStreaksScreen from '../screens/Menu/MyStreaksScreen';
-import SettingsScreen from '../screens/Menu/SettingsScreen';
-import MenuScreen from '../screens/Menu';
-import UserInfoScreen from '../screens/Menu/UserInfoScreen';
-import TutorialScreen from '../screens/Menu/TutorialScreen';
+import MyStreaksScreen from '@/screens/Menu/MyStreaksScreen';
+import SettingsScreen from '@/screens/Menu/SettingsScreen';
+import MenuScreen from '@/screens/Menu';
+import UserInfoScreen from '@/screens/Menu/UserInfoScreen';
+import TutorialScreen from '@/screens/Menu/TutorialScreen';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 

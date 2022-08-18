@@ -6,8 +6,8 @@ import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/core';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
-import { dispatchStore } from '../../../redux/store';
-import { login } from '../../../redux/user/userThunk';
+import { dispatchStore } from '@/redux/store';
+import { login } from '@/redux/user/userThunk';
 
 const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +59,7 @@ const LoginScreen = () => {
       <View style={styles.container}>
         <Text style={styles.textLogin}>Login</Text>
         <View style={styles.searchSection}>
-          <IconButton icon={require('../../../assets/ic_mail.png')} style={styles.icMail} size={24} color="#A4BCC1" />
+          <IconButton icon={require('@/assets/ic_mail.png')} style={styles.icMail} size={24} color="#A4BCC1" />
           <TextInput
             value={values.email}
             onChangeText={handleChange('email')}
@@ -71,7 +71,7 @@ const LoginScreen = () => {
         </View>
         {errors.email && touched.email ? <Text style={styles.error}>{errors.email}</Text> : null}
         <View style={styles.searchSection}>
-          <IconButton icon={require('../../../assets/ic_pass.png')} style={styles.icMail} size={24} color="#A4BCC1" />
+          <IconButton icon={require('@/assets/ic_pass.png')} style={styles.icMail} size={24} color="#A4BCC1" />
           <TextInput
             value={values.password}
             onChangeText={handleChange('password')}
@@ -119,7 +119,7 @@ const LoginScreen = () => {
         <TouchableOpacity>
           <View style={styles.btnFace}>
             <View style={styles.flexRow}>
-              <Image source={require('../../../assets/ic_face.png')} style={styles.icFace} />
+              <Image source={require('@/assets/ic_face.png')} style={styles.icFace} />
               <View style={styles.center}>
                 <Text style={styles.textLoginFace}>Log in with Facebook</Text>
               </View>
@@ -129,7 +129,7 @@ const LoginScreen = () => {
         <TouchableOpacity>
           <View style={styles.btnApple}>
             <View style={styles.flexRow}>
-              <Image source={require('../../../assets/ic_apple.png')} style={styles.icFace} />
+              <Image source={require('@/assets/ic_apple.png')} style={styles.icFace} />
               <View style={styles.center}>
                 <Text style={styles.textLoginFace}>Log in with Apple</Text>
               </View>

@@ -26,7 +26,7 @@ const UserInfoScreen = () => {
           {ava !== '' ? (
             <Image source={{ uri: ava }} style={styles.icAva} />
           ) : (
-            <Image source={require('../../../assets/ava.png')} style={styles.icAva} />
+            <Image source={require('@/assets/ava.png')} style={styles.icAva} />
           )}
           <TouchableOpacity
             onPress={() => {

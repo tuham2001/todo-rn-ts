@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import { dispatchStore } from '../../../redux/store';
-import { updateTask } from '../../../redux/todo/todoThunk';
+import { dispatchStore } from '@/redux/store';
+import { updateTask } from '@/redux/todo/todoThunk';
 
 const DetailTask = (props: any) => {
   const { task } = props.route.params;

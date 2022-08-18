@@ -16,16 +16,16 @@ const MenuScreen = () => {
       <DrawerContentScrollView>
         <View style={styles.container}>
           <View style={styles.flexRow}>
-            <Image source={require('../../assets/ic_home.png')} style={styles.icHome} />
+            <Image source={require('@/assets/ic_home.png')} style={styles.icHome} />
             <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}>
-              <Image source={require('../../assets/x.png')} style={styles.icX} />
+              <Image source={require('@/assets/x.png')} style={styles.icX} />
             </TouchableOpacity>
           </View>
           <View style={styles.row}>
             <View>
               <View style={styles.container}>
                 <View>
-                  <Image source={require('../../assets/ava.png')} style={styles.icAva} />
+                  <Image source={require('@/assets/ava.png')} style={styles.icAva} />
                   <Text style={styles.name}>James B.</Text>
                 </View>
               </View>
@@ -36,42 +36,42 @@ const MenuScreen = () => {
                   style={styles.borderActive}
                   colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
                   <TouchableOpacity onPress={() => handleTabMenu('Home')} style={[styles.row, styles.bgActive]}>
-                    <Image source={require('../../assets/ic_menu_1.png')} style={styles.icMenu} />
+                    <Image source={require('@/assets/ic_menu_1.png')} style={styles.icMenu} />
                     <Text style={styles.textActive}>Home</Text>
                   </TouchableOpacity>
                 </LinearGradient>
                 <TouchableOpacity
                   onPress={() => handleTabMenu('MyStreaksScreen')}
                   style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_2.png')} style={styles.icMenu} />
+                  <Image source={require('@/assets/ic_menu_2.png')} style={styles.icMenu} />
                   <Text style={styles.text}>My streaks</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleTabMenu('TutorialScreen')} style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_3.png')} style={styles.icMenu} />
+                  <Image source={require('@/assets/ic_menu_3.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Tutorial</Text>
                 </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_4.png')} style={styles.icMenu} />
+                  <Image source={require('@/assets/ic_menu_4.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Send a testimonial</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_5.png')} style={styles.icMenu} />
+                  <Image source={require('@/assets/ic_menu_5.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Welcome video</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_6.png')} style={styles.icMenu} />
+                  <Image source={require('@/assets/ic_menu_6.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Rewards</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_7.png')} style={styles.icMenu} />
+                  <Image source={require('@/assets/ic_menu_7.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Help & Support</Text>
                 </View>
                 <TouchableOpacity onPress={() => handleTabMenu('SettingsScreen')} style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_8.png')} style={styles.icMenu} />
+                  <Image source={require('@/assets/ic_menu_8.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Settings</Text>
                 </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
-                  <Image source={require('../../assets/ic_menu_9.png')} style={styles.icMenu} />
+                  <Image source={require('@/assets/ic_menu_9.png')} style={styles.icMenu} />
                   <Text style={styles.text}>Disclaimer</Text>
                 </View>
               </Drawer.Section>
