@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { checkTask } from '@/redux/todo/todoThunk';
-import { dispatchStore } from '@/redux/store';
+import { checkTask } from '@src/redux/todo/todoThunk';
+import { dispatchStore } from '@src/redux/store';
 import { IconButton } from 'react-native-paper';
 
 function Task(props: any) {
@@ -24,7 +24,7 @@ function Task(props: any) {
       <View style={styles.item}>
         <View style={styles.itemLeft}>
           <IconButton
-            icon={require('@/assets/check_white.png')}
+            icon={require('@src/assets/check_white.png')}
             size={15}
             color={task.isChecked ? 'white' : '#E8EAED'}
             style={{ backgroundColor: task.isChecked ? '#0079bf' : '#E8EAED' }}

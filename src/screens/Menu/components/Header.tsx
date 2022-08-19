@@ -12,7 +12,7 @@ const Header = (props: any) => {
         onPress={() =>
           !goBackScreen ? navigation.dispatch(DrawerActions.openDrawer()) : navigation.navigate(goBackScreen)
         }>
-        <Image source={require('@/assets/ic_left.png')} style={styles.icLeft} />
+        <Image source={require('@src/assets/ic_left.png')} style={styles.icLeft} />
       </TouchableOpacity>
       <Text style={styles.textHeader}>{header}</Text>
     </View>

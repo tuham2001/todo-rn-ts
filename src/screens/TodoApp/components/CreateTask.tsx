@@ -2,12 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { addTask } from '@/redux/todo/todoThunk';
-import { getUuid } from '@/utils/common/getUuid';
-import { dispatchStore } from '@/redux/store';
+import { addTask } from '@src/redux/todo/todoThunk';
+import { getUuid } from '@src/utils/common/getUuid';
+import { dispatchStore } from '@src/redux/store';
 import { useNavigation } from '@react-navigation/core';
 
-const CreateTask = () => {
+export const CreateTask = () => {
   const navigation = useNavigation();
   const [disabled, setDisabled] = useState(true);
   const validationSchema = yup.object().shape({
@@ -139,4 +139,3 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-export default CreateTask;

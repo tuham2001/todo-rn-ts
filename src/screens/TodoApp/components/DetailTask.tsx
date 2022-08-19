@@ -1,9 +1,9 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import { dispatchStore } from '@/redux/store';
-import { updateTask } from '@/redux/todo/todoThunk';
+import { dispatchStore } from '@src/redux/store';
+import { updateTask } from '@src/redux/todo/todoThunk';
 
-const DetailTask = (props: any) => {
+export const DetailTask = (props: any) => {
   const { task } = props.route.params;
   const [edit, setEdit] = useState(false);
   const [hide, setHide] = useState(false);
@@ -191,4 +191,3 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
 });
-export default memo(DetailTask);

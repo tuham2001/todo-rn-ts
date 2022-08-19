@@ -3,13 +3,13 @@ import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, Alert, Pre
 import { useSelector } from 'react-redux';
 import Task from './components/Task';
 import { IconButton } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/core';
-import { dispatchStore } from '@/redux/store';
-import { deleteTask } from '@/redux/todo/todoThunk';
-import { logout } from '@/redux/user/userThunk';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/core';
+import { deleteTask } from '@src/redux/todo/todoThunk';
+import { logout } from '@src/redux/user/userThunk';
+import { dispatchStore } from '@src/redux/store';
 
-const Home = (props: any) => {
+export const Home = (props: any) => {
   const { drawer } = props;
   const navigation = useNavigation();
   const taskList = useSelector((state: any) => state.user.todoReducer.taskList);
@@ -95,7 +95,7 @@ const Home = (props: any) => {
         </View>
       </Modal>
       <IconButton
-        icon={require('@/assets/ic_plus.png')}
+        icon={require('@src/assets/ic_plus.png')}
         style={styles.floatinBtn}
         size={40}
         color="white"
@@ -238,4 +238,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-export default Home;

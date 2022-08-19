@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import ImagePicker from 'react-native-image-crop-picker';
 import Header from '../components/Header';
 
-const UserInfoScreen = () => {
+export const UserInfoScreen = () => {
   const [ava, setAva] = useState('');
   const user = useSelector((state: any) => state.user.userReducer.user);
   const handleChangeAva = () => {
@@ -26,7 +26,7 @@ const UserInfoScreen = () => {
           {ava !== '' ? (
             <Image source={{ uri: ava }} style={styles.icAva} />
           ) : (
-            <Image source={require('@/assets/ava.png')} style={styles.icAva} />
+            <Image source={require('@src/assets/ava.png')} style={styles.icAva} />
           )}
           <TouchableOpacity
             onPress={() => {
@@ -156,4 +156,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default UserInfoScreen;

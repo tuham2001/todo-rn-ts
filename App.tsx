@@ -8,14 +8,19 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import store, { persistor } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import Navigator from '@/navigations/StartScreen';
+import Navigator from '@src/navigations/StartScreen';
+import { requestUserPermission, NotificationListner } from '@src/utils/pushnotification_helper';
 
 const App = () => {
+  useEffect(() => {
+    requestUserPermission();
+    NotificationListner();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
