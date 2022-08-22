@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import messaging from '@react-native-firebase/messaging';
+import { useSelector } from 'react-redux';
+
 import {
   Home,
   DetailTask,
@@ -69,42 +70,10 @@ const HomeDrawer = () => {
   );
 };
 const Navigator = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Assume a message-notification contains a "type" property in the data payload of the screen to open
-    messaging().onNotificationOpenedApp((remoteMessage) => {
-      console.log('Notification caused app to open from background state:', remoteMessage.notification);
-    });
-
-    // Check whether an initial notification is available
-    messaging()
-      .getInitialNotification()
-      .then((remoteMessage) => {
-        if (remoteMessage) {
-          console.log('Notification caused app to open from quit state:', remoteMessage.notification);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  if (loading) {
-    return null;
-  }
-
+  const user = useSelector((state: any) => state.user.userReducer.user);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeDrawer">
-        {/* <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Home"
-          component={Home}
-        /> */}
+      <Stack.Navigator initialRouteName={user ? 'HomeDrawer' : 'LoginScreen'}>
         <Stack.Screen
           options={{
             headerShown: false,

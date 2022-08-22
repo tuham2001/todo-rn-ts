@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 import todoReducer from './todo/todoRedux';
 import userReducer from './user/userRedux';
+import languageReducer from './language/languageRedux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   persistStore,
@@ -21,6 +22,7 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 const rootReducer = combineReducers({
+  languageReducer,
   userReducer,
   todoReducer,
 });

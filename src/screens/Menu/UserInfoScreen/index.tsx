@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { i18n } from '@src/assets/i18n';
 import { useSelector } from 'react-redux';
 import ImagePicker from 'react-native-image-crop-picker';
 import Header from '../components/Header';
@@ -32,7 +33,7 @@ export const UserInfoScreen = () => {
             onPress={() => {
               handleChangeAva();
             }}>
-            <Text style={styles.textPink}>Change profile photo</Text>
+            <Text style={styles.textPink}>{i18n.t('changePro')}</Text>
           </TouchableOpacity>
         </View>
         <LinearGradient
@@ -41,7 +42,7 @@ export const UserInfoScreen = () => {
           style={styles.items}
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <View style={styles.flexRow}>
-            <Text style={[styles.textWhite, styles.mt14, styles.w100]}>First name</Text>
+            <Text style={[styles.textWhite, styles.mt14, styles.w100]}>{i18n.t('fName')}</Text>
             <Text style={[styles.textWhite, styles.mt14]}>{user?.firstName}</Text>
           </View>
         </LinearGradient>
@@ -51,7 +52,7 @@ export const UserInfoScreen = () => {
           style={[styles.items, styles.mt8]}
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <View style={styles.flexRow}>
-            <Text style={[styles.textWhite, styles.mt14, styles.w100]}>Last name</Text>
+            <Text style={[styles.textWhite, styles.mt14, styles.w100]}>{i18n.t('lName')}</Text>
             <Text style={[styles.textWhite, styles.mt14]}>{user?.lastName}</Text>
           </View>
         </LinearGradient>
@@ -61,7 +62,7 @@ export const UserInfoScreen = () => {
           style={[styles.items, styles.mt8]}
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <View style={styles.flexRow}>
-            <Text style={[styles.textWhite, styles.mt14, styles.w100]}>Email</Text>
+            <Text style={[styles.textWhite, styles.mt14, styles.w100]}>{i18n.t('email')}</Text>
             <Text style={[styles.textWhite, styles.mt14]}>{user.email}</Text>
           </View>
         </LinearGradient>
@@ -71,7 +72,7 @@ export const UserInfoScreen = () => {
           style={[styles.items, styles.mt8]}
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <View style={styles.flexRow}>
-            <Text style={[styles.textWhite, styles.mt14, styles.w100]}>Password</Text>
+            <Text style={[styles.textWhite, styles.mt14, styles.w100]}>{i18n.t('pwd')}</Text>
             <Text style={[styles.textWhite, styles.mt14]}>
               {user.password
                 .split('')

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { i18n } from '@src/assets/i18n';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { dispatchStore } from '@src/redux/store';
 import { updateTask } from '@src/redux/todo/todoThunk';
@@ -60,14 +61,14 @@ export const DetailTask = (props: any) => {
               value={updateTitle}
               onChangeText={(text: any) => handleChangeTitle(text)}
               style={styles.text}
-              placeholder="Write a description"
+              placeholder={i18n.t('wTitle')}
             />
             <TextInput
               editable={edit}
               value={updateDescription}
               onChangeText={(text: any) => handleChangeDescription(text)}
               style={styles.text}
-              placeholder="Write a description"
+              placeholder={i18n.t('wDescription')}
             />
           </View>
         </View>
@@ -80,7 +81,7 @@ export const DetailTask = (props: any) => {
             }}
             style={styles.cancel}>
             <View>
-              <Text style={styles.addText}>Cancel</Text>
+              <Text style={styles.addText}>{i18n.t('cancel')}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -90,7 +91,7 @@ export const DetailTask = (props: any) => {
             disabled={disabled}
             style={disabled ? styles.disabled : styles.save}>
             <View>
-              <Text style={styles.addText}>Save</Text>
+              <Text style={styles.addText}>{i18n.t('save')}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -102,7 +103,7 @@ export const DetailTask = (props: any) => {
           }}
           style={styles.addWrapper}>
           <View>
-            <Text style={styles.addText}>Sửa</Text>
+            <Text style={styles.addText}>{i18n.t('fix')}</Text>
           </View>
         </TouchableOpacity>
       ) : null}

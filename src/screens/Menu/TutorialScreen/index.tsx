@@ -18,6 +18,7 @@ import { WebView } from 'react-native-webview';
 import { DrawerActions, useNavigation } from '@react-navigation/core';
 import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
+import { i18n } from '@src/assets/i18n';
 
 export const TutorialScreen = () => {
   const navigation = useNavigation();
@@ -197,7 +198,7 @@ export const TutorialScreen = () => {
           <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
             <Image source={require('@src/assets/LeftBtn.png')} style={styles.icLeft} />
           </TouchableOpacity>
-          <Text style={styles.textHeader}>TUTORIAL</Text>
+          <Text style={styles.textHeader}>{i18n.t('tutorial')}</Text>
         </View>
         <Modal
           isVisible={modalVisible}
@@ -356,7 +357,7 @@ export const TutorialScreen = () => {
               <Pressable style={[styles.flexRow, styles.mt16]} onPress={() => setModalVisible(!modalVisible)}>
                 <View style={styles.btnCancel}>
                   <TouchableOpacity onPress={handleCancel} style={[styles.flexRow, styles.flex]}>
-                    <Text style={styles.textCancel}>Cancel</Text>
+                    <Text style={styles.textCancel}>{i18n.t('cancel')}</Text>
                     <Image source={require('@src/assets/Cancel.png')} style={styles.icDownload} />
                   </TouchableOpacity>
                 </View>
@@ -366,7 +367,7 @@ export const TutorialScreen = () => {
                   style={styles.items}
                   colors={['rgba(0, 0, 0, 0.02)', ' rgba(255, 255, 255, 0.33)']}>
                   <TouchableOpacity onPress={handleSave} style={[styles.flexRow, styles.flex]}>
-                    <Text style={styles.textWhite}>Save</Text>
+                    <Text style={styles.textWhite}>{i18n.t('save')}</Text>
                     <Image source={require('@src/assets/FloppyDisk.png')} style={styles.icDownload} />
                   </TouchableOpacity>
                 </LinearGradient>
@@ -375,7 +376,7 @@ export const TutorialScreen = () => {
           </View>
         </Modal>
         <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setModalVisible(true)}>
-          <Text style={styles.textStyle}>Show Calendar</Text>
+          <Text style={styles.textStyle}>{i18n.t('showCalendar')}</Text>
         </Pressable>
 
         {listWebView.map((item: any, index: number) => {
@@ -393,7 +394,7 @@ export const TutorialScreen = () => {
           style={[styles.items, styles.container]}
           colors={['rgba(0, 0, 0, 0.02)', ' rgba(255, 255, 255, 0.33)']}>
           <TouchableOpacity onPress={() => checkPermission()} style={[styles.flexRow, styles.flex]}>
-            <Text style={styles.textWhite}>Download PDF instruction</Text>
+            <Text style={styles.textWhite}>{i18n.t('downPdf')}</Text>
             <Image source={require('@src/assets/download.png')} style={styles.icDownload} />
           </TouchableOpacity>
         </LinearGradient>

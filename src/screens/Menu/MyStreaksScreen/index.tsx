@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Calendars from './components/Calendars';
 import Header from '../components/Header';
+import { i18n } from '@src/assets/i18n';
 
 export const MyStreaksScreen = () => {
   return (
@@ -16,8 +17,8 @@ export const MyStreaksScreen = () => {
         <View style={styles.flexRow}>
           <Image source={require('@src/assets/ic_myStreaks.png')} style={styles.icHeader} />
           <View>
-            <Text style={[styles.textWhite, styles.mt14]}>Current streak: 1</Text>
-            <Text style={[styles.textLongest, styles.mt2]}>Longest streak: 2</Text>
+            <Text style={[styles.textWhite, styles.mt14]}>{i18n.t('curStreak')} 1</Text>
+            <Text style={[styles.textLongest, styles.mt2]}>{i18n.t('logStreak')} 2</Text>
           </View>
         </View>
       </LinearGradient>

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useFormik } from 'formik';
+import { i18n } from '@src/assets/i18n';
 import * as yup from 'yup';
 import { addTask } from '@src/redux/todo/todoThunk';
 import { getUuid } from '@src/utils/common/getUuid';
@@ -49,12 +50,12 @@ export const CreateTask = () => {
     <View style={styles.flex}>
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
         <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionTitle}>Create task</Text>
+          <Text style={styles.sectionTitle}>{i18n.t('createTask')}</Text>
           <TextInput
             value={values.title}
             onChangeText={handleChange('title')}
             style={styles.input}
-            placeholder="Write a title"
+            placeholder={i18n.t('wTitle')}
             onBlur={handleBlur('title')}
           />
           {errors.title && touched.title ? <Text style={styles.error}>{errors.title}</Text> : null}
@@ -62,7 +63,7 @@ export const CreateTask = () => {
             value={values.description}
             onChangeText={handleChange('description')}
             style={styles.input}
-            placeholder="Write a description"
+            placeholder={i18n.t('wDescription')}
             onBlur={handleBlur('description')}
           />
         </View>
@@ -72,7 +73,7 @@ export const CreateTask = () => {
         style={disabled ? styles.disabled : styles.addWrapper}
         onPress={handleSubmit}>
         <View>
-          <Text style={styles.addText}>Save</Text>
+          <Text style={styles.addText}>{i18n.t('save')}</Text>
         </View>
       </TouchableOpacity>
     </View>

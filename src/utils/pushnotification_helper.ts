@@ -42,6 +42,6 @@ export const NotificationListner = () => {
     });
 
   messaging().onMessage(async (remoteMessage) => {
-    console.log('Notification on froground state.....', remoteMessage);
+    console.log('Notification on foreground state.....', remoteMessage);
   });
 };

@@ -5,6 +5,7 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { Drawer } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import { Home } from '@src/screens';
+import { i18n } from '@src/assets/i18n';
 
 export const MenuScreen = () => {
   const navigation = useNavigation();
@@ -37,42 +38,42 @@ export const MenuScreen = () => {
                   colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
                   <TouchableOpacity onPress={() => handleTabMenu('Home')} style={[styles.row, styles.bgActive]}>
                     <Image source={require('@src/assets/ic_menu_1.png')} style={styles.icMenu} />
-                    <Text style={styles.textActive}>Home</Text>
+                    <Text style={styles.textActive}>{i18n.t('home')}</Text>
                   </TouchableOpacity>
                 </LinearGradient>
                 <TouchableOpacity
                   onPress={() => handleTabMenu('MyStreaksScreen')}
                   style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_2.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>My streaks</Text>
+                  <Text style={styles.text}>{i18n.t('myStreaks')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleTabMenu('TutorialScreen')} style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_3.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Tutorial</Text>
+                  <Text style={styles.text}>{i18n.t('tutorial')}</Text>
                 </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_4.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Send a testimonial</Text>
+                  <Text style={styles.text}>{i18n.t('testimonial')}</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_5.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Welcome video</Text>
+                  <Text style={styles.text}>{i18n.t('welVideo')}</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_6.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Rewards</Text>
+                  <Text style={styles.text}>{i18n.t('rewards')}</Text>
                 </View>
                 <View style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_7.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Help & Support</Text>
+                  <Text style={styles.text}>{i18n.t('help')}</Text>
                 </View>
                 <TouchableOpacity onPress={() => handleTabMenu('SettingsScreen')} style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_8.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Settings</Text>
+                  <Text style={styles.text}>{i18n.t('settings')}</Text>
                 </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_9.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>Disclaimer</Text>
+                  <Text style={styles.text}>{i18n.t('disclaimer')}</Text>
                 </View>
               </Drawer.Section>
             </View>
@@ -85,7 +86,7 @@ export const MenuScreen = () => {
       <Drawer.Section>
         <View>
           <Text style={styles.textPower}>
-            Powered by <Text style={styles.textUpNow}>UpNow</Text>
+            {i18n.t('powered')} <Text style={styles.textUpNow}>{i18n.t('upNow')}</Text>
           </Text>
         </View>
       </Drawer.Section>

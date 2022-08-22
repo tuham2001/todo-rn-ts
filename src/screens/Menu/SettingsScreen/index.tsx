@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'rea
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/core';
 import Header from '../components/Header';
+import { i18n } from '@src/assets/i18n';
 
 export const SettingsScreen = () => {
   const navigation = useNavigation();
@@ -16,7 +17,7 @@ export const SettingsScreen = () => {
           style={styles.items}
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <TouchableOpacity onPress={() => navigation.navigate('UserInfoScreen')} style={styles.flexRow}>
-            <Text style={[styles.textWhite, styles.mt14]}>User Info</Text>
+            <Text style={[styles.textWhite, styles.mt14]}>{i18n.t('userInfo')}</Text>
             <Image source={require('@src/assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
           </TouchableOpacity>
         </LinearGradient>
@@ -26,7 +27,7 @@ export const SettingsScreen = () => {
           style={[styles.items, styles.mt8]}
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <View style={styles.flexRow}>
-            <Text style={[styles.textWhite, styles.mt14]}>My Subscriptions</Text>
+            <Text style={[styles.textWhite, styles.mt14]}>{i18n.t('mySub')}</Text>
             <Image source={require('@src/assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
           </View>
         </LinearGradient>
@@ -36,7 +37,7 @@ export const SettingsScreen = () => {
           style={[styles.items, styles.mt8]}
           colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
           <View style={styles.flexRow}>
-            <Text style={[styles.textWhite, styles.mt14]}>Profile Tags</Text>
+            <Text style={[styles.textWhite, styles.mt14]}>{i18n.t('proTags')}</Text>
             <Image source={require('@src/assets/ic_right_pink.png')} style={[styles.icRight, styles.mt14]} />
           </View>
         </LinearGradient>
@@ -47,7 +48,7 @@ export const SettingsScreen = () => {
         style={styles.items}
         colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
         <TouchableOpacity style={styles.flexRow}>
-          <Text style={[styles.textWhite, styles.mt14]}>Terms & Conditions</Text>
+          <Text style={[styles.textWhite, styles.mt14]}>{i18n.t('termConditions')}</Text>
         </TouchableOpacity>
       </LinearGradient>
       <LinearGradient
@@ -56,7 +57,7 @@ export const SettingsScreen = () => {
         style={[styles.items, styles.mt8]}
         colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
         <TouchableOpacity style={styles.flexRow}>
-          <Text style={[styles.textWhite, styles.mt14]}>Privacy policy</Text>
+          <Text style={[styles.textWhite, styles.mt14]}>{i18n.t('pPolicy')}</Text>
         </TouchableOpacity>
       </LinearGradient>
       <LinearGradient
@@ -65,7 +66,7 @@ export const SettingsScreen = () => {
         style={[styles.items, styles.containerDelete]}
         colors={['rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0)']}>
         <TouchableOpacity style={styles.flexRow}>
-          <Text style={[styles.textPink, styles.mt14]}>Delete account</Text>
+          <Text style={[styles.textPink, styles.mt14]}>{i18n.t('delAcc')}</Text>
         </TouchableOpacity>
       </LinearGradient>
     </View>

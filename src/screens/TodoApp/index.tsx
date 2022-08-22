@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Task from './components/Task';
 import { IconButton } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
+import { i18n } from '@src/assets/i18n';
 import { useNavigation } from '@react-navigation/core';
 import { deleteTask } from '@src/redux/todo/todoThunk';
 import { logout } from '@src/redux/user/userThunk';
@@ -15,7 +16,7 @@ export const Home = (props: any) => {
   const taskList = useSelector((state: any) => state.user.todoReducer.taskList);
   const [hideDelete, setHideDelete] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const onLogoutPressed = () => {
+  const onLogoutPressed = async () => {
     dispatchStore(logout());
     navigation.navigate('LoginScreen');
   };
@@ -36,6 +37,7 @@ export const Home = (props: any) => {
     setModalVisible(!modalVisible);
     dispatchStore(deleteTask());
   }, [modalVisible]);
+
   return (
     <View style={styles.flex}>
       {drawer ? (
@@ -54,10 +56,10 @@ export const Home = (props: any) => {
           </TouchableOpacity> */}
           <View style={styles.viewDelete}>
             <TouchableOpacity style={styles.logout} onPress={() => onLogoutPressed()}>
-              <Text>Đăng xuất</Text>
+              <Text>{i18n.t('logout')}</Text>
             </TouchableOpacity>
           </View>
-          <Text style={styles.sectionTitle}>Todo list app</Text>
+          <Text style={styles.sectionTitle}>{i18n.t('app')}</Text>
           {hideDelete ? (
             <View style={styles.viewDelete}>
               <TouchableOpacity style={styles.delete} onPress={() => setModalVisible(true)}>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useFormik } from 'formik';
+import { i18n } from '@src/assets/i18n';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/core';
 import Header from '../components/Header';
@@ -51,14 +52,14 @@ export const RegisterScreen = () => {
         <View style={styles.hr1} />
         <View style={styles.hr5} />
         <View style={styles.container}>
-          <Text style={styles.textLogin}>Register</Text>
+          <Text style={styles.textLogin}>{i18n.t('register')}</Text>
           <View style={styles.searchSection}>
             <IconButton icon={require('@src/assets/ic_invite.png')} style={styles.icMail} size={24} color="#A4BCC1" />
             <TextInput
               value={values.firstname}
               onChangeText={handleChange('firstname')}
               style={styles.input}
-              placeholder="First name"
+              placeholder={i18n.t('fName')}
               placeholderTextColor={'#828187'}
               onBlur={handleBlur('firstname')}
             />
@@ -70,7 +71,7 @@ export const RegisterScreen = () => {
               value={values.lastname}
               onChangeText={handleChange('lastname')}
               style={styles.input}
-              placeholder="Last name"
+              placeholder={i18n.t('lName')}
               placeholderTextColor={'#828187'}
               onBlur={handleBlur('lastname')}
             />
@@ -82,7 +83,7 @@ export const RegisterScreen = () => {
               value={values.email}
               onChangeText={handleChange('email')}
               style={styles.input}
-              placeholder="Email"
+              placeholder={i18n.t('email')}
               placeholderTextColor={'#828187'}
               onBlur={handleBlur('email')}
             />
@@ -94,7 +95,7 @@ export const RegisterScreen = () => {
               value={values.password}
               onChangeText={handleChange('password')}
               style={styles.input}
-              placeholder="Password"
+              placeholder={i18n.t('pwd')}
               placeholderTextColor={'#828187'}
               onBlur={handleBlur('password')}
             />
@@ -114,10 +115,10 @@ export const RegisterScreen = () => {
               />
             ) : null}
             <Text style={[styles.textStyle, styles.flex]}>
-              by clicking on “Register” you agree to our
-              <Text style={styles.pinkColor}> Terms & Conditions </Text>
-              and
-              <Text style={styles.pinkColor}> Privacy Policy</Text>
+              {i18n.t('byRegister')}
+              <Text style={styles.pinkColor}> {i18n.t('termConditions')} </Text>
+              {i18n.t('and')}
+              <Text style={styles.pinkColor}> {i18n.t('pPolicy')}</Text>
             </Text>
           </View>
         </View>
@@ -129,14 +130,14 @@ export const RegisterScreen = () => {
             end={{ x: 0.9717, y: 0.0 }}
             style={styles.btnLogin}
             colors={['#FF5789', '#FF9B9C']}>
-            <Text style={styles.textLoginBtn}>Register In</Text>
+            <Text style={styles.textLoginBtn}>{i18n.t('registerIn')}</Text>
           </LinearGradient>
         </TouchableOpacity>
         <View style={styles.signUp}>
           <View style={styles.flexRow}>
-            <Text style={styles.textStyle}>Already have an account?</Text>
+            <Text style={styles.textStyle}>{i18n.t('alreadyAcc')}</Text>
             <TouchableOpacity onPress={() => handleLogin()}>
-              <Text style={styles.textSignUp}>Log In</Text>
+              <Text style={styles.textSignUp}>{i18n.t('login')}</Text>
             </TouchableOpacity>
           </View>
         </View>

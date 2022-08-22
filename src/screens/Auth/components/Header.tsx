@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
+import { i18n } from '@src/assets/i18n';
 
 const Header = () => {
   return (
     <View style={styles.flexRow}>
       <Image source={require('@src/assets/icHeader.png')} style={styles.icHeader} />
       <View style={styles.flexColumn}>
-        <Text style={styles.upNow}>UpNow</Text>
-        <Text style={styles.digital}>Digital Hypnotherapy</Text>
+        <Text style={styles.upNow}>{i18n.t('upNow')}</Text>
+        <Text style={styles.digital}>{i18n.t('digitalHy')}</Text>
       </View>
     </View>
   );

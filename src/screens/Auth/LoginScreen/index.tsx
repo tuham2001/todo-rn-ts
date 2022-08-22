@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, View, StyleSheet, Text, TextInput, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useFormik } from 'formik';
+import { i18n } from '@src/assets/i18n';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/core';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import { dispatchStore } from '@src/redux/store';
 import { login } from '@src/redux/user/userThunk';
+import { useSelector } from 'react-redux';
+import { changeLanguage } from '@src/redux/language/languageRedux';
 
 export const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [I18n, setI18n] = useState(i18n);
+  const language = useSelector((state: any) => state.user.languageReducer.language);
+  const handleChangeLanguage = (item: string) => {
+    let newI18n = I18n;
+    newI18n.locale = item;
+    setI18n(newI18n);
+    dispatchStore(changeLanguage(item));
+  };
+  useEffect(() => {
+    i18n.locale = language;
+  }, [language]);
   const navigation = useNavigation();
   const validationSchema = yup.object().shape({
     email: yup.string().required('Email is not empty').email('Must be a valid email'),
@@ -54,17 +68,25 @@ export const LoginScreen = () => {
       <View style={styles.container}>
         <Header />
       </View>
+      <View style={styles.center}>
+        <TouchableOpacity onPress={() => handleChangeLanguage('vi')}>
+          <Text style={styles.textSignUp}>vi</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleChangeLanguage('en')}>
+          <Text style={styles.textSignUp}>en</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.hr1} />
       <View style={styles.hr5} />
       <View style={styles.container}>
-        <Text style={styles.textLogin}>Login</Text>
+        <Text style={styles.textLogin}>{i18n.t('login')}</Text>
         <View style={styles.searchSection}>
           <IconButton icon={require('@src/assets/ic_mail.png')} style={styles.icMail} size={24} color="#A4BCC1" />
           <TextInput
             value={values.email}
             onChangeText={handleChange('email')}
             style={styles.input}
-            placeholder="Email"
+            placeholder={i18n.t('email')}
             placeholderTextColor={'#828187'}
             onBlur={handleBlur('email')}
           />
@@ -76,7 +98,7 @@ export const LoginScreen = () => {
             value={values.password}
             onChangeText={handleChange('password')}
             style={styles.input}
-            placeholder="Password"
+            placeholder={i18n.t('pwd')}
             placeholderTextColor={'#828187'}
             onBlur={handleBlur('password')}
             secureTextEntry
@@ -85,7 +107,7 @@ export const LoginScreen = () => {
         {errors.password && touched.password ? <Text style={styles.error}>{errors.password}</Text> : null}
         <View style={styles.forgot}>
           <TouchableOpacity>
-            <Text style={styles.textStyle}>Forget password ?</Text>
+            <Text style={styles.textStyle}>{i18n.t('fpwd')}</Text>
           </TouchableOpacity>
         </View>
         {isLoading ? (
@@ -97,22 +119,22 @@ export const LoginScreen = () => {
               end={{ x: 0.9717, y: 0.0 }}
               style={styles.btnLogin}
               colors={['#FF5789', '#FF9B9C']}>
-              <Text style={styles.textLoginBtn}>Log In</Text>
+              <Text style={styles.textLoginBtn}>{i18n.t('login')}</Text>
             </LinearGradient>
           </TouchableOpacity>
         )}
         <View style={styles.signUp}>
           <View style={styles.flexRow}>
             <TouchableOpacity>
-              <Text style={styles.textStyle}>Don’t have an account?</Text>
+              <Text style={styles.textStyle}>{i18n.t('notAcc')}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => handleRegister()}>
-              <Text style={styles.textSignUp}>Sign Up</Text>
+              <Text style={styles.textSignUp}>{i18n.t('signUp')}</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.orLog}>
-          <Text style={styles.textStyle}>Or Log in with</Text>
+          <Text style={styles.textStyle}>{i18n.t('orLogin')}</Text>
         </View>
         <View style={styles.hrLeft}></View>
         <View style={styles.hrRight}></View>
@@ -121,7 +143,7 @@ export const LoginScreen = () => {
             <View style={styles.flexRow}>
               <Image source={require('@src/assets/ic_face.png')} style={styles.icFace} />
               <View style={styles.center}>
-                <Text style={styles.textLoginFace}>Log in with Facebook</Text>
+                <Text style={styles.textLoginFace}>{i18n.t('logFace')}</Text>
               </View>
             </View>
           </View>
@@ -131,7 +153,7 @@ export const LoginScreen = () => {
             <View style={styles.flexRow}>
               <Image source={require('@src/assets/ic_apple.png')} style={styles.icFace} />
               <View style={styles.center}>
-                <Text style={styles.textLoginFace}>Log in with Apple</Text>
+                <Text style={styles.textLoginFace}>{i18n.t('logApp')}</Text>
               </View>
             </View>
           </View>
