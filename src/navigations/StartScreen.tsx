@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -16,6 +16,7 @@ import {
   MenuScreen,
   UserInfoScreen,
   TutorialScreen,
+  ProductScreen,
 } from '@src/screens';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -65,6 +66,13 @@ const HomeDrawer = () => {
         }}
         name="TutorialScreen"
         component={TutorialScreen}
+      />
+      <Drawer.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="ProductScreen"
+        component={ProductScreen}
       />
     </Drawer.Navigator>
   );

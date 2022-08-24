@@ -10,3 +10,4 @@ export * from './Menu/MyStreaksScreen';
 export * from './Menu/SettingsScreen';
 export * from './Menu/UserInfoScreen';
 export * from './Menu/TutorialScreen';
+export * from './Menu/ProductScreen';

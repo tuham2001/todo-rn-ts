@@ -51,10 +51,10 @@ export const MenuScreen = () => {
                   <Image source={require('@src/assets/ic_menu_3.png')} style={styles.icMenu} />
                   <Text style={styles.text}>{i18n.t('tutorial')}</Text>
                 </TouchableOpacity>
-                <View style={[styles.row, styles.bgActive]}>
+                <TouchableOpacity onPress={() => handleTabMenu('ProductScreen')} style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_4.png')} style={styles.icMenu} />
-                  <Text style={styles.text}>{i18n.t('testimonial')}</Text>
-                </View>
+                  <Text style={styles.text}>{i18n.t('product')}</Text>
+                </TouchableOpacity>
                 <View style={[styles.row, styles.bgActive]}>
                   <Image source={require('@src/assets/ic_menu_5.png')} style={styles.icMenu} />
                   <Text style={styles.text}>{i18n.t('welVideo')}</Text>

@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import todoReducer from './todo/todoRedux';
 import userReducer from './user/userRedux';
 import languageReducer from './language/languageRedux';
+import productReducer from './product/productRedux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   persistStore,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   languageReducer,
   userReducer,
   todoReducer,
+  productReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
