@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
-export const ProductItem = (props: any) => {
+const ProductItem = (props: any) => {
   let { product, listProduct, setItemProduct, setModalVisible } = props;
   let index = listProduct.findIndex((spGH: any) => spGH.maSP === product.maSP);
   const [isChecked, setIsChecked] = useState(product.isChecked);
   const [amount, setAmount] = useState(product.soLuong);
-  const handleCheckTask = () => {
+  const handleCheckTask = useCallback(() => {
     product.isChecked = !isChecked;
     setIsChecked(!isChecked);
-  };
-  const handleChangeAmount = (increase: boolean) => {
-    if (increase) {
-      product.soLuong = amount + 1;
-      setAmount(amount + 1);
-    } else {
-      if (amount < 2) {
-        setItemProduct(index);
-        setModalVisible(true);
-      } else {
+  }, [product, isChecked]);
+  const handleChangeAmount = useCallback(
+    (increase: boolean) => {
+      if (increase) {
         product.soLuong = amount + 1;
-        setAmount(amount - 1);
+        setAmount(amount + 1);
+      } else {
+        if (amount < 2) {
+          setItemProduct(index);
+          setModalVisible(true);
+        } else {
+          product.soLuong = amount + 1;
+          setAmount(amount - 1);
+        }
       }
-    }
-  };
+    },
+    [amount, index, product, setItemProduct, setModalVisible],
+  );
   return (
     <View>
       <View style={styles.item}>
@@ -60,6 +63,7 @@ export const ProductItem = (props: any) => {
   );
 };
 
+export default memo(ProductItem);
 const styles = StyleSheet.create({
   ml20: {
     marginLeft: 20,

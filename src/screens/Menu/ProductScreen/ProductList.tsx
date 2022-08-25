@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { ProductItem } from './ProductItem';
 import { ProductData } from './ProductData';
 import Modal from 'react-native-modal';
+import ProductItem from './ProductItem';
 
-export const ProductList = () => {
+const ProductList = () => {
   const [listProduct, setListProduct] = useState<any[]>();
   const [modalVisible, setModalVisible] = useState(false);
   const [itemProduct, setItemProduct] = useState(-1);
   useEffect(() => {
     setListProduct(ProductData);
   }, []);
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     setModalVisible(!modalVisible);
-  };
-  const handleSuccess = () => {
+  }, [modalVisible]);
+  const handleSuccess = useCallback(() => {
     const newListProduct = listProduct;
     newListProduct && newListProduct.splice(itemProduct, 1);
     setListProduct(newListProduct);
     setModalVisible(!modalVisible);
-  };
+  }, [listProduct, itemProduct, modalVisible]);
   return (
     <View style={styles.bgColor}>
       {listProduct &&
@@ -53,6 +53,7 @@ export const ProductList = () => {
   );
 };
 
+export default memo(ProductList);
 const styles = StyleSheet.create({
   textGrey: {
     color: 'grey',

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { ProductList } from './ProductList';
 import Header from '../components/Header';
 import { ProductData } from './ProductData';
+import ProductList from './ProductList';
 
 export const ProductScreen = () => {
-  const handlePurchase = () => {
+  const handlePurchase = useCallback(() => {
     const cart: any[] = [];
     ProductData.map((item: any) => {
       if (item.isChecked) {
@@ -13,7 +13,7 @@ export const ProductScreen = () => {
       }
     });
     console.log('cart', cart);
-  };
+  }, []);
   return (
     <View style={styles.bgColor}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
